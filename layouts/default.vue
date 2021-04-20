@@ -1,17 +1,19 @@
 <template>
   <v-app>
-    <LayoutMain>
-      <div slot="sidebar">
-        I'm the sidebar
-      </div>
+    <LayoutMain :hide-aside="hideAside">
+      <NavigationSidebar slot="sidebar" />
 
       <div slot="content">
-        <h1>Hey, I'm here!</h1>
-        <!-- <HelloWorld /> -->
         <nuxt />
       </div>
 
       <div slot="aside">
+        <NavigationButton class="mb-2" icon=" ">
+          Carlos Hernandez
+        </NavigationButton>
+
+        <v-divider />
+
         I'm lateral content
       </div>
     </LayoutMain>
