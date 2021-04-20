@@ -8,13 +8,13 @@ export default {
     },
     themes: {
       light: {
-        primary: '#ee44aa',
-        secondary: '#424242',
-        accent: '#82B1FF',
-        error: '#FF5252',
-        info: '#2196F3',
-        success: '#4CAF50',
-        warning: '#FFC107'
+        primary: '#4285F4',
+        secondary: '#EA4335',
+        accent: '#FBBC04',
+        error: '#EA4335',
+        info: '#4285F4',
+        success: '#34A853',
+        warning: '#FBBC04'
       }
     }
   },

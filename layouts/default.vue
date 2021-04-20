@@ -1,57 +1,29 @@
 <template>
   <v-app>
-    <div class="wrapper">
-      <v-app-bar
-        app
-        :color="color"
-        elevate-on-scroll
-        :extended="extended"
-        fixed
-        :flat="!elevate"
-        clipped-left
-        clipped-right
-      >
-        <!-- <slot name="topbar"></slot> -->
-        <NavigationMainTopbar />
+    <LayoutMain>
+      <div slot="sidebar">
+        I'm the sidebar
+      </div>
 
-        <!-- <slot name="extension" slot="extension"></slot> -->
-        <div v-if="extended" slot="extension">
-          <slot name="extension" />
-        </div>
-      </v-app-bar>
-
-      <v-main>
+      <div slot="content">
+        <h1>Hey, I'm here!</h1>
+        <!-- <HelloWorld /> -->
         <nuxt />
-      </v-main>
-    </div>
+      </div>
+
+      <div slot="aside">
+        I'm lateral content
+      </div>
+    </LayoutMain>
   </v-app>
 </template>
 
 <script>
 export default {
-  name: 'TopbarLayout',
-  props: {
-    app: {
-      type: Boolean,
-      default: false
-    },
-    color: {
-      type: String,
-      default: 'white'
-    },
-    elevate: {
-      type: Boolean,
-      default: false
-    },
-    extended: {
-      type: Boolean,
-      default: false
-    },
-    fixed: {
-      type: Boolean,
-      default: false
-    }
-  }
+  name: 'DefaultLayout',
+  data: () => ({
+    hideAside: false
+  })
 }
 </script>
 

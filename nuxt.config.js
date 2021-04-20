@@ -1,7 +1,7 @@
+const path = require('path');
+
 import vuetifyOptions from './plugins/vuetify.options'
 import i18n from './i18n'
-
-
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -20,7 +20,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-   'material-design-icons-iconfont/dist/material-design-icons.css'
+    'material-design-icons-iconfont/dist/material-design-icons.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -64,6 +64,7 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     ...vuetifyOptions,
+    treeShake: false,
     customVariables: ['~/assets/variables.scss']
   },
 
@@ -71,5 +72,11 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    extend(config) {
+      // To avoid vue and vuetify being loaded twice, just alias them ;)
+      config.resolve.alias['vue$'] = path.resolve('./node_modules/vue/dist/vue.runtime.esm.js')
+      config.resolve.alias['^vuetify'] = path.resolve(__dirname, 'node_modules/vuetify')
+      // console.log(config.resolve.alias);
+    }
   }
-}
+} 
