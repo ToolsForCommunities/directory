@@ -1,7 +1,8 @@
 <template>
   <v-app>
     <LayoutMain :hide-aside="hideAside">
-      <NavigationSidebar slot="sidebar" />
+      <NavigationMain slot="sidebar" />
+      <!-- <NavigationSidebar slot="sidebar" /> -->
 
       <div slot="content">
         <nuxt />
@@ -23,11 +24,11 @@
 <script>
 export default {
   name: 'DefaultLayout',
-  data: () => ({
-    hideAside: false
-  })
+  computed: {
+    hideAside () {
+      const isDesktop = ['md', 'lg', 'xl'].includes(this.$vuetify.breakpoint.name)
+      return !isDesktop
+    }
+  }
 }
 </script>
-
-<style scoped>
-</style>

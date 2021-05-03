@@ -1,0 +1,44 @@
+<template>
+  <v-bottom-navigation
+    grow
+  >
+    <NuxtLink
+      v-for="item in items"
+      :key="item.name"
+      :to="item.route"
+      class="bottombar-link"
+    >
+      <NavigationButton
+        :icon="item.icon"
+        :active="$route.path === item.route"
+      >
+        <span>{{ item.name }}</span>
+      </NavigationButton>
+    </NuxtLink>
+  </v-bottom-navigation>
+</template>
+
+<script>
+export default {
+  name: 'NavigationSidebar',
+  props: {
+    items: {
+      type: Array,
+      default: () => []
+    }
+  }
+}
+</script>
+
+<style scoped>
+.bottombar-link {
+  text-decoration: none;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.v-item-group.v-bottom-navigation .bottombar-link >>> .v-btn__content {
+  flex-direction: column;
+}
+</style>

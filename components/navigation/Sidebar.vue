@@ -1,12 +1,15 @@
 <template>
   <div class="d-flex flex-column">
-    <NavigationButton class="my-2" icon=" ">
+    <NavigationButton
+      class="my-2 hidden-sm-and-down"
+      icon=" "
+    >
       Community Tools
     </NavigationButton>
 
     <v-divider />
 
-    <div class="d-flex flex-column mx-2">
+    <div class="d-flex sidebar-links mx-2">
       <NuxtLink
         v-for="item in items"
         :key="item.name"
@@ -28,35 +31,20 @@
 <script>
 export default {
   name: 'NavigationSidebar',
-  data: () => ({
-    items: [
-      {
-        name: 'Home',
-        icon: 'mdi-home',
-        route: '/'
-      },
-      {
-        name: 'People',
-        icon: 'mdi-account',
-        route: '/people'
-      },
-      {
-        name: 'Startups',
-        icon: 'mdi-account-multiple',
-        route: '/startups'
-      },
-      {
-        name: 'More',
-        icon: 'mdi-dots-horizontal-circle',
-        route: '/inspire'
-      }
-    ]
-  })
+  props: {
+    items: {
+      type: Array,
+      default: () => []
+    }
+  }
 }
 </script>
 
 <style scoped>
-/*>>> a, a {*/
+.sidebar-links {
+  flex-direction: column;
+}
+
 .sidebar-link {
   text-decoration: none;
 }
