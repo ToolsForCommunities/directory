@@ -1,17 +1,10 @@
 <template>
-  <!-- <div class="ct-container ct-container__has-topbar"> -->
-  <div>
+  <div class="ct-container ct-container__has-topbar">
     <NavigationMainTopbar
-      title="Home"
+      title="Search"
     />
     <v-container>
-      lol
-      <HelloWorld />
-      lol
-      <HelloWorld />
-      lol
-      <HelloWorld />
-      <HelloWorld />
+      Hi, let's search for something.
     </v-container>
   </div>
 </template>
@@ -25,16 +18,6 @@ export default {
   //   Logo,
   //   VuetifyLogo
   // }
-  head: {
-    title: 'Home',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Your community, connected'
-      }
-    ]
-  }
 }
 </script>
 

@@ -2,16 +2,18 @@
   <!-- <div class="ct-container ct-container__has-topbar"> -->
   <div>
     <NavigationMainTopbar
-      title="Home"
+      title="People"
     />
     <v-container>
-      lol
-      <HelloWorld />
-      lol
-      <HelloWorld />
-      lol
-      <HelloWorld />
-      <HelloWorld />
+      <p>
+        People list goes here
+      </p>
+      <p>
+        <nuxt-link to="?aside=person/1">I'm person 1</nuxt-link>
+        <nuxt-link to="?aside=person/3">I'm person 3</nuxt-link>
+        <!-- <nuxt-link to="/person/3">I'm a person</nuxt-link> -->
+        <!-- <nuxt-link to="people?profile=3">I'm a person</nuxt-link> -->
+      </p>
     </v-container>
   </div>
 </template>
@@ -26,12 +28,12 @@ export default {
   //   VuetifyLogo
   // }
   head: {
-    title: 'Home',
+    title: 'People',
     meta: [
       {
         hid: 'description',
         name: 'description',
-        content: 'Your community, connected'
+        content: 'All the people in your directory'
       }
     ]
   }

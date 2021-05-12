@@ -1,12 +1,13 @@
 <template>
   <div class="d-flex flex-column">
-    <NavigationButton
-      class="my-2 hidden-sm-and-down"
-      icon=" "
+    <v-app-bar
+      flat
+      elevate-on-scroll
+      color="white"
+      class="d-flex flex-column"
     >
-      Community Tools
-    </NavigationButton>
-
+      <span>Community Tools</span>
+    </v-app-bar>
     <v-divider />
 
     <div class="d-flex sidebar-links mx-2">
@@ -16,13 +17,13 @@
         :to="item.route"
         class="sidebar-link"
       >
-        <NavigationButton
+        <CTNavigationButton
           :icon="item.icon"
           :active="$route.path === item.route"
           class="my-2"
         >
           {{ item.name }}
-        </NavigationButton>
+        </CTNavigationButton>
       </NuxtLink>
     </div>
   </div>

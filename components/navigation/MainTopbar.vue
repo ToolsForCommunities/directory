@@ -1,47 +1,33 @@
 <template>
-  <v-row>
-    <v-col md="2" class="d-flex align-center">
-      <!-- <img :src="logo" class="logo" :title="title"> -->
-      Community Tools
-    </v-col>
+  <div class="sticky-topbar">
+    <v-app-bar
+      color="white"
+      flat
+    >
+      <!-- absolute -->
+      <h1>
+        {{ title }}
+      </h1>
 
-    <v-col>
-      <v-text-field
-        v-model="search"
-        prepend-inner-icon="search"
-        hide-details
-        flat
-        solo
-        clearable
-        color="#F5F5F5"
-        class="search-box"
-        :placeholder="searchPlaceholder"
-        @keyup="trackSearch(search)"
-        @click:clear="searchClear()"
-        @click="goToSearchMenu"
-      />
-    </v-col>
-
-    <v-col md="auto" class="text-xs-center">
-      <v-btn
-        large
-        color="primary"
-        href="/admin/#/suggest-public"
-        target="_blank"
-        class="elevation-0"
-      >
-        <v-icon left>
-          add
-        </v-icon>Add Profile
-      </v-btn>
-    </v-col>
-
-    <v-col md="auto" class="text-xs-center">
-      <!-- perfil -->
-      <!-- <profile-icon-dropdown /> -->
-      <v-avatar />
-    </v-col>
-  </v-row>
+      <v-col>
+        <v-text-field
+          v-model="search"
+          prepend-inner-icon="search"
+          hide-details
+          flat
+          solo
+          clearable
+          color="#F5F5F5"
+          class="search-box"
+          :placeholder="searchPlaceholder"
+          @keyup="trackSearch(search)"
+          @click:clear="searchClear()"
+          @click="goToSearchMenu"
+        />
+      </v-col>
+    </v-app-bar>
+    <v-divider style="position: absolute; width: 100%" />
+  </div>
 </template>
 
 <script>
@@ -72,6 +58,12 @@ export default {
   //   SiteLogo,
   //   ProfileIconDropdown
   // },
+  props: {
+    title: {
+      type: String,
+      default: 'Directory'
+    }
+  },
   data: () => ({
     searching: false,
     tabs: 'tabs-home',
@@ -113,9 +105,9 @@ export default {
       const tags = this.tagList.map(item => item.name)
       return this.tagFilter.filter(item => tags.includes(item))
     },
-    title () {
-      return this.config.title || 'Directory'
-    },
+    // title () {
+    //   return this.config.title || 'Directory'
+    // },
     logo () {
       return this.config.logo || '/img/logo.png'
     },
@@ -140,14 +132,16 @@ export default {
       }
     },
     goToSearchMenu () {
-      // if (!this.hasSearch) {
-      //   this.$router.push({ name: 'people' })
-      // }
-      console.log('Navigate to search')
+      this.$router.push('search')
     }
   }
-  // created() {
-  //   this.$store.dispatch('tags/getTags');
-  // },
 }
 </script>
+
+<style scoped>
+.sticky-topbar {
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+}
+</style>
