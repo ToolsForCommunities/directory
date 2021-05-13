@@ -1,5 +1,6 @@
 <template>
-  <div class="ct-container ct-container__has-topbar">
+  <!-- <div class="ct-container ct-container__has-topbar"> -->
+  <div>
     <NavigationMainTopbar
       title="Search"
     />

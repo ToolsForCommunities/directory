@@ -9,22 +9,21 @@
         {{ title }}
       </h1>
 
-      <v-col>
-        <v-text-field
-          v-model="search"
-          prepend-inner-icon="search"
-          hide-details
-          flat
-          solo
-          clearable
-          color="#F5F5F5"
-          class="search-box"
-          :placeholder="searchPlaceholder"
-          @keyup="trackSearch(search)"
-          @click:clear="searchClear()"
-          @click="goToSearchMenu"
-        />
-      </v-col>
+      <v-spacer />
+
+      <v-text-field
+        v-model="search"
+        prepend-inner-icon="search"
+        hide-details
+        flat
+        solo
+        clearable
+        class="search-box"
+        :placeholder="searchPlaceholder"
+        @keyup="trackSearch(search)"
+        @click:clear="searchClear()"
+        @click="goToSearchMenu"
+      />
     </v-app-bar>
     <v-divider style="position: absolute; width: 100%" />
   </div>
@@ -144,4 +143,14 @@ export default {
   top: 0px;
   z-index: 1;
 }
+
+.search-box {
+  border-radius: 24px;
+  background-color: rgba(33, 33, 33, .08);
+  max-width: 240px;
+}
+/*.tççheme--light.v-text-field--solo > .v-input__control > .v-input__slot*/
+  .search-box >>> .v-input__control > .v-input__slot {
+    background-color: inherit;
+  }
 </style>

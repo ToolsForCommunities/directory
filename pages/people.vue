@@ -9,11 +9,24 @@
         People list goes here
       </p>
       <p>
-        <nuxt-link to="?aside=person/1">I'm person 1</nuxt-link>
-        <nuxt-link to="?aside=person/3">I'm person 3</nuxt-link>
-        <!-- <nuxt-link to="/person/3">I'm a person</nuxt-link> -->
-        <!-- <nuxt-link to="people?profile=3">I'm a person</nuxt-link> -->
+        <nuxt-link to="?aside=person/1">
+          I'm person 1
+        </nuxt-link>
+        <nuxt-link to="?aside=person/3">
+          I'm person 3
+        </nuxt-link>
       </p>
+
+      <v-row dense>
+        <v-col
+          v-for="i in 9"
+          :key="i"
+          cols="6"
+          lg="4"
+        >
+          <PersonCard />
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>

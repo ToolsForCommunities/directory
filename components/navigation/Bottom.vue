@@ -8,12 +8,12 @@
       :to="item.route"
       class="bottombar-link"
     >
-      <NavigationButton
+      <CTNavigationButton
         :icon="item.icon"
         :active="$route.path === item.route"
       >
         <span>{{ item.name }}</span>
-      </NavigationButton>
+      </CTNavigationButton>
     </NuxtLink>
   </v-bottom-navigation>
 </template>
