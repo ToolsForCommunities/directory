@@ -11,6 +11,8 @@
         <AsideRouter />
       </div>
     </CTLayoutMain>
+
+    <alertBar />
   </v-app>
 </template>
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import firebase from 'firebase/app'
+import firebase from 'firebase/app'
 // import 'firebase/auth'
 
 import api from '@/store/helpers/api'
@@ -42,13 +42,22 @@ export const actions = {
       })
   },
   logout ({ commit }) {
-    return this.$fire.auth().signOut()
+    return firebase.auth().signOut()
       .then(() => {
         commit('LOG_OUT')
       })
       .catch((error) => {
         console.error(error)
       })
+  },
+  // This action is automatically called from @nuxtjs/firebase plugin
+  onAuthStateChangedAction ({ commit, dispatch }, { authUser }) {
+    if (!authUser) {
+      commit('LOG_OUT')
+    } else {
+      firebase.auth().currentUser.getIdToken()
+        .then(token => dispatch('login', { token }))
+    }
   }
 }
 

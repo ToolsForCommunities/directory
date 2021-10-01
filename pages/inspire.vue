@@ -14,6 +14,13 @@
           </small>
         </footer>
       </blockquote>
+      <CTButton
+        @click="$store.dispatch('auth/logout')"
+      >
+        Logout
+      </CTButton>
+
+      <nuxt-link to="login">Login</nuxt-link>
     </v-col>
   </v-row>
 </template>
