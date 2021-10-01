@@ -1,6 +1,7 @@
-const path = require('path');
+import path from 'path'
 
 import vuetifyOptions from './plugins/vuetify.options'
+import firebase from './plugins/firebase.config'
 import i18n from './i18n'
 
 export default {
@@ -35,11 +36,9 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
+    '@nuxtjs/dotenv',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify'
-    // ['@nuxtjs/vuetify', {
-    //   optionsPath: './plugins/vuetify.options.js'
-    // }]
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -48,7 +47,8 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    'nuxt-i18n'
+    '@nuxtjs/i18n',
+    '@nuxtjs/firebase'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -70,13 +70,16 @@ export default {
 
   i18n,
 
+  // Firebase config options
+  firebase,
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    extend(config) {
+    extend (config) {
       // To avoid vue and vuetify being loaded twice, just alias them ;)
-      config.resolve.alias['vue$'] = path.resolve('./node_modules/vue/dist/vue.runtime.esm.js')
+      config.resolve.alias.vue$ = path.resolve('./node_modules/vue/dist/vue.runtime.esm.js')
       config.resolve.alias['^vuetify'] = path.resolve(__dirname, 'node_modules/vuetify')
       // console.log(config.resolve.alias);
     }
   }
-} 
+}

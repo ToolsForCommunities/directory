@@ -72,13 +72,6 @@ export default {
     dialog: false,
     tabClicked: null
   }),
-  head: {
-    title () {
-      return {
-        inner: 'Directory'
-      }
-    }
-  },
   computed: {
     config () {
       return this.$settings

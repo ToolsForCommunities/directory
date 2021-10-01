@@ -11,12 +11,16 @@
     "lint": "npm run lint:js"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.13.1",
+    "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/firebase": "^7.6.1",
+    "@nuxtjs/i18n": "^7.0.3",
     "@nuxtjs/pwa": "^3.3.5",
-    "core-js": "^3.9.1",
+    "core-js": "^3.15.1",
+    "firebase": "^8.10.0",
     "material-design-icons-iconfont": "^6.1.0",
-    "nuxt": "^2.15.3",
-    "nuxt-i18n": "^6.24.0"
+    "nuxt": "^2.15.8",
+    "vuetify": "^2.5.5"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^6.0.0",
