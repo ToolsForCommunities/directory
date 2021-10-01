@@ -13,8 +13,9 @@
       <p>I'm the default lateral content</p>
     </div>
 
+    <AsidePerson v-else-if="$store.state.aside.current === 'person'" />
+
     <div v-else>
-      <AsidePerson v-if="$store.state.aside.current === 'person'" />
       <p>{{ $store.state.aside }}</p>
     </div>
   </div>

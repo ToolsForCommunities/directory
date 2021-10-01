@@ -13,12 +13,15 @@
     </template>
 
     <v-img
-      height="227"
+      aspect-ratio="1"
       src="https://codingcarlos.com/wp-content/uploads/2017/07/epic-yo-600x600.jpg"
     />
 
-    <v-card-title class="pb-0">
-      Carlos Hernandez
+    <v-card-title
+      class="pb-0 text-truncate d-block"
+      title="Carlos Hernadez Martin"
+    >
+      Carlos Hernandez Martin
     </v-card-title>
 
     <v-card-text>
@@ -64,3 +67,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.v-card__title {
+  /*background-color: green;*/
+}
+</style>
