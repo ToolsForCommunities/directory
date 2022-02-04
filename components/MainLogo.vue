@@ -6,7 +6,7 @@
     <img
       class="ct-logo-image"
       alt="Community Tools"
-      src="/logo.svg"
+      src="/img/logo.svg"
     >
   </div>
 </template>
