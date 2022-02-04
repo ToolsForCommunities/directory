@@ -1,5 +1,10 @@
 <template>
   <v-app>
+    <!-- Show skeleton while app is hydratated -->
+    <transition name="fade">
+      <SkeletonLayout v-if="loading" />
+    </transition>
+
     <CTLayoutMain :hide-aside="hideAside">
       <NavigationMain slot="sidebar" />
 
@@ -12,7 +17,7 @@
       </div>
     </CTLayoutMain>
 
-    <alertBar />
+    <AlertBar />
   </v-app>
 </template>
 
@@ -32,11 +37,27 @@ export default {
       store.dispatch('aside/clear')
     }
   },
+  data: () => ({
+    loading: true
+  }),
   computed: {
     hideAside () {
       const isDesktop = checkIsDesktop(this.$vuetify.breakpoint.name)
       return !isDesktop && !this.$store.state.aside.current
     }
+  },
+  mounted () {
+    this.loading = false
   }
 }
 </script>
+
+<style>
+/* Fade transitions */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+</style>

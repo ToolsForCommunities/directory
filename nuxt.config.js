@@ -68,6 +68,7 @@ export default {
     customVariables: ['~/assets/variables.scss']
   },
 
+  // i18n settings
   i18n,
 
   // Firebase config options

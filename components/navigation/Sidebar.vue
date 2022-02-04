@@ -4,9 +4,9 @@
       flat
       elevate-on-scroll
       color="white"
-      class="d-flex flex-column"
+      class="d-flex flex-column pt-2"
     >
-      <span>Community Tools</span>
+      <MainLogo class="sidebar-logo" />
     </v-app-bar>
     <v-divider />
 
@@ -42,6 +42,10 @@ export default {
 </script>
 
 <style scoped>
+.sidebar-logo {
+  max-width: 180px;
+}
+
 .sidebar-links {
   flex-direction: column;
 }
