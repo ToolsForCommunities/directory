@@ -14,7 +14,11 @@ export default {
         error: '#EA4335',
         info: '#4285F4',
         success: '#34A853',
-        warning: '#FBBC04'
+        warning: '#FBBC04',
+        grey: {
+          base: '#EDEDED',
+          lighten1: '#F8F8F8'
+        }
       }
     }
   },
