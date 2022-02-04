@@ -24,6 +24,11 @@ export default {
         route: '/'
       },
       {
+        name: 'Search',
+        icon: 'mdi-account',
+        route: '/search'
+      },
+      {
         name: 'People',
         icon: 'mdi-account',
         route: '/people'

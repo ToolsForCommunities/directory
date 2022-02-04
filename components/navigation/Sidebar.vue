@@ -20,7 +20,7 @@
         <CTNavigationButton
           :icon="item.icon"
           :active="$route.path === item.route"
-          class="my-2"
+          class="my-0"
         >
           {{ item.name }}
         </CTNavigationButton>

@@ -8,7 +8,10 @@ export default {
     },
     themes: {
       light: {
-        primary: '#4285F4',
+        primary: {
+          base: '#4285F4',
+          lighten5: '#E8F0FE'
+        },
         secondary: '#EA4335',
         accent: '#FBBC04',
         error: '#EA4335',
