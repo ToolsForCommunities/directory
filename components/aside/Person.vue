@@ -1,23 +1,69 @@
 <template>
-  <div>
-    <v-app-bar
+  <div class="aside-card ma-4">
+    <v-toolbar
+      dense
       flat
       color="white"
     >
-      <h2>Carlos Hernandez</h2>
-      <v-spacer />
+      <!-- nuxt-link
+        :to="{ query: {} }" -->
       <v-btn
         icon
-        nuxt-link
-        :to="{ query: {} }"
         @click="$store.dispatch('aside/clear')"
       >
-        <v-icon>mdi-close</v-icon>
+        <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
-    </v-app-bar>
+
+      <v-toolbar-title>
+        Profile
+      </v-toolbar-title>
+
+      <v-spacer />
+
+      <v-menu
+        bottom
+        left
+      >
+        <template #activator="{ on, attrs }">
+          <v-btn
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item>
+            <v-list-item-title>Option 1</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Option 2</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Option 3</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-toolbar>
+
     <v-divider />
 
-    <p>I'm a person ^^</p>
-    <p>{{ $store.state.aside }}</p>
+    <div class="ma-4">
+      <p>I'm a person ^^</p>
+      <p>{{ $store.state.aside }}</p>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.aside-card {
+  border:  1px solid var(--v-grey-lighten1);
+}
+
+.aside-card,
+.aside-card .v-toolbar {
+  border-radius: 8px;
+}
+</style>
