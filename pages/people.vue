@@ -5,7 +5,7 @@
       title="People"
     />
     <v-container>
-      <p>
+<!--       <p>
         People list goes here
       </p>
       <p>
@@ -16,7 +16,7 @@
           I'm person 3
         </nuxt-link>
       </p>
-
+ -->
       <v-row dense>
         <v-col
           v-for="(item, i) in people"
@@ -24,7 +24,10 @@
           cols="6"
           lg="4"
         >
-          <PersonCard />
+          <nuxt-link to="?aside=person/1">
+            <!-- I'm person 1 -->
+            <PersonCard />
+          </nuxt-link>
         </v-col>
       </v-row>
 

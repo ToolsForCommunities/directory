@@ -50,16 +50,20 @@
 
     <v-divider />
 
-    <div class="ma-4">
+    <div class="pa-4">
       <p>I'm a person ^^</p>
       <p>{{ $store.state.aside }}</p>
+
+      <PersonCard />
+      <PersonCard />
     </div>
   </div>
 </template>
 
 <style scoped>
 .aside-card {
-  border:  1px solid var(--v-grey-lighten1);
+  border:  1px solid var(--v-grey-base);
+  /*border:  1px solid var(--v-grey-lighten1);*/
 }
 
 .aside-card,
