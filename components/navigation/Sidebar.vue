@@ -8,7 +8,6 @@
     >
       <MainLogo class="sidebar-logo" />
     </v-app-bar>
-    <v-divider />
 
     <div class="d-flex sidebar-links mx-2">
       <NuxtLink

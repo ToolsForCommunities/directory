@@ -37,7 +37,6 @@
       </div>
 
       <v-chip-group
-        v-model="selection"
         multiple
         active-class="deep-purple accent-4 white--text"
       >
@@ -56,15 +55,13 @@
 <script>
 export default {
   data: () => ({
-    loading: false,
-    selection: 1
-  }),
+    loading: false
+  })
+  // created () {
+  //   this.loading = true
 
-  created () {
-    this.loading = true
-
-    setTimeout(() => (this.loading = false), 2000)
-  }
+  //   setTimeout(() => (this.loading = false), 2000)
+  // }
 }
 </script>
 

@@ -19,6 +19,13 @@ export default {
     ]
   },
 
+  // env: {
+  //   baseUrl: process.env.VUE_APP_API_URL || 'http://lalala.com'
+  // },
+  publicRuntimeConfig: {
+    ...process.env
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'material-design-icons-iconfont/dist/material-design-icons.css'

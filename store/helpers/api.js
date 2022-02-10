@@ -1,16 +1,14 @@
-function getUrl () {
-  // console.log(context)
-  // console.log(this.$nuxt.$route)
-  // let url = `${window.location.origin}/api`
-  let url = '/api'
+const data = {
+  url: '',
+  setUrl
+}
 
-  if (process.env.NODE_ENV !== 'production' && process.env.VUE_APP_API_URL) {
-    url = process.env.VUE_APP_API_URL
+function setUrl (url, env) {
+  data.url = '/api'
+
+  if (env !== 'production' && url) {
+    data.url = url
   }
-
-  return url
 }
 
-export default {
-  url: getUrl()
-}
+export default data
