@@ -1,5 +1,5 @@
 <template>
-  <div class="aside-card ma-4">
+  <div class="aside-card ma-4 mb-0">
     <v-toolbar
       dense
       flat
@@ -50,7 +50,7 @@
 
     <v-divider />
 
-    <div class="pa-4">
+    <div class="pa-4 lateral-scrollable">
       <p>I'm a person ^^</p>
       <p>{{ $store.state.aside }}</p>
 
@@ -71,5 +71,10 @@
 .aside-card,
 .aside-card .v-toolbar {
   border-radius: 8px;
+}
+
+.lateral-scrollable {
+  max-height: calc(100vh - 48px - 32px);
+  overflow-y: scroll;
 }
 </style>

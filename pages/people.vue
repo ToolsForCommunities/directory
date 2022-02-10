@@ -5,7 +5,11 @@
       title="People"
     />
     <v-container>
-<!--       <p>
+      <div>
+        FILTERS
+      </div>
+      <!--
+      <p>
         People list goes here
       </p>
       <p>
@@ -15,8 +19,8 @@
         <nuxt-link to="?aside=person/3">
           I'm person 3
         </nuxt-link>
-      </p>
- -->
+      </p> -->
+
       <v-row dense>
         <v-col
           v-for="(item, i) in people"
@@ -31,7 +35,11 @@
         </v-col>
       </v-row>
 
-<!--      <v-virtual-scroll
+      <!-- Infinite scroll dispatcher -->
+      <div class="py-4" v-intersect="infiniteScrolling" />
+
+      <!--
+      <v-virtual-scroll
         height="1200"
         :item-height="itemHeigth"
         bench="3"
@@ -75,6 +83,9 @@
 // }
 
 export default {
+  data: () => ({
+    itemsToShow: 12
+  }),
   fetch () {
     return this.$store.dispatch('people/list')
   },
@@ -90,14 +101,29 @@ export default {
   },
   computed: {
     people () {
-      // return this.$store.state.people.list
-      const n = 10
-      return this.$store.state.people.list.slice(0, n)
-      // const cols = this.$vuetify.breakpoint.mdAndDown ? 2 : 3
-      // return makeRows(this.$store.state.people.list, cols)
+      if (this.itemsToShow === this.$store.state.people.list.length) {
+        return this.$store.state.people.list
+      }
+
+      return this.$store.state.people.list.slice(0, this.itemsToShow)
     },
     itemHeigth () {
       return 398
+    }
+  },
+  methods: {
+    infiniteScrolling () {
+      const itemsToAdd = 9
+
+      if (this.itemsToShow === this.$store.state.people.list.length) {
+        return false
+      } else if (this.itemsToShow + itemsToAdd >= this.$store.state.people.list.length) {
+        this.itemsToShow = this.$store.state.people.list.length
+      } else {
+        this.itemsToShow += itemsToAdd
+      }
+
+      return true
     }
   }
   // created () {
