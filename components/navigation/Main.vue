@@ -25,7 +25,7 @@ export default {
       },
       {
         name: 'Search',
-        icon: 'mdi-account',
+        icon: 'mdi-magnify',
         route: '/search'
       },
       {
