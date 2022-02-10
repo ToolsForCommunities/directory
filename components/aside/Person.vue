@@ -54,6 +54,8 @@
       <p>I'm a person ^^</p>
       <p>{{ $store.state.aside }}</p>
 
+      <CTLol />
+
       <PersonCard />
       <PersonCard />
     </div>
