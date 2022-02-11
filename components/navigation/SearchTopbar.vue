@@ -5,12 +5,12 @@
       flat
       extended
     >
-      <v-btn
+      <!-- <v-btn
         icon
         @click="$store.dispatch('aside/clear')"
       >
         <v-icon>mdi-arrow-left</v-icon>
-      </v-btn>
+      </v-btn> -->
 
       <v-text-field
         v-model="search"
@@ -151,9 +151,8 @@ export default {
 .search-box {
   border-radius: 24px;
   background-color: rgba(33, 33, 33, .08);
-  max-width: 455px;
 }
-/*.tççheme--light.v-text-field--solo > .v-input__control > .v-input__slot*/
+
   .search-box >>> .v-input__control > .v-input__slot {
     background-color: inherit;
   }
