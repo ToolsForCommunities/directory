@@ -31,8 +31,20 @@
         class="btn-labeled py-7 px-2 ml-3"
         @click="$store.dispatch('aside/clear')"
       >
-        <v-icon>mdi-tune</v-icon>
+        <div>
+          <v-icon>mdi-tune</v-icon>
+          <!-- <v-badge
+            inline
+            content="2"
+          >
+          </v-badge> -->
+        </div>
         <span>Filters</span>
+          <!-- <v-badge
+            inline
+            content="2"
+          >
+          </v-badge> -->
       </v-btn>
 
       <template slot="extension">
