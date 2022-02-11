@@ -6,9 +6,6 @@
     />
     <v-container>
       <p>
-        Startup
-      </p>
-      <p>
         <nuxt-link to="?aside=startup/2">
           I'm startup 2
         </nuxt-link>
