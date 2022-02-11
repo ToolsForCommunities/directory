@@ -23,7 +23,7 @@
     </NavigationSearchTopbar>
     <v-container>
       <v-tabs-items v-model="tab">
-        <v-tab-item>
+        <!-- <v-tab-item>
           <h2>All results</h2>
         </v-tab-item>
 
@@ -33,7 +33,7 @@
 
         <v-tab-item>
           <h2>Startups found</h2>
-        </v-tab-item>
+        </v-tab-item> -->
       </v-tabs-items>
     </v-container>
   </div>
