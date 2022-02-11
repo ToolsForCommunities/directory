@@ -5,19 +5,25 @@
       title="People"
     />
     <v-container>
-      <div>
-        FILTERS
-      </div>
-      <!--
-      <p>
-        People list goes here
-      </p>
-      <p>
+      <v-sheet
+      >
+        <v-chip-group
+          multiple
+          active-class="primary--text"
+        >
+          <v-chip
+            v-for="tag in tags"
+            :key="tag"
+          >
+            {{ tag }}
+          </v-chip>
+        </v-chip-group>
+      </v-sheet>
+  </v-row>
+
+      <!-- <p>
         <nuxt-link to="?aside=person/1">
           I'm person 1
-        </nuxt-link>
-        <nuxt-link to="?aside=person/3">
-          I'm person 3
         </nuxt-link>
       </p> -->
 
@@ -84,6 +90,19 @@
 
 export default {
   data: () => ({
+    // dummy
+    tags: [
+      'All filters',
+      'Developer',
+      'Sales',
+      'Marketing',
+      'Founder',
+      'Designer',
+      'Talent',
+      'Growth',
+      'Cloud'
+    ],
+    // dummy
     itemsToShow: 12
   }),
   fetch () {
