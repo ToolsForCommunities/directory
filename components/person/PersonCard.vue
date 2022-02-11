@@ -2,7 +2,6 @@
   <v-card
     :loading="loading"
     class="mx-auto my-1"
-    max-width="374"
   >
     <template slot="progress">
       <v-progress-linear
@@ -17,38 +16,45 @@
       src="https://codingcarlos.com/wp-content/uploads/2017/07/epic-yo-600x600.jpg"
     />
 
-    <v-card-title
-      class="pb-0 text-truncate d-block"
-      title="Carlos Hernadez Martin"
-    >
-      Carlos Hernandez Martin
-    </v-card-title>
-
-    <v-card-text>
-      <div class="subtitle-1 mb-2">
-        <span>
-          Tech Founder
-        </span> <br>
-        Community Tools
-      </div>
-
-      <div>
-        <v-icon>mdi-map-marker</v-icon> Madrid
-      </div>
-
-      <v-chip-group
-        multiple
-        active-class="deep-purple accent-4 white--text"
+    <div>
+      <v-card-title
+        class="pb-0 pt-2 px-4 text-truncate d-block"
+        title="Carlos Hernadez Martin"
       >
-        <v-chip>Technology</v-chip>
+        Carlos Hernandez Martin
+      </v-card-title>
 
-        <v-chip>UX</v-chip>
+      <v-card-text>
+        <div class="subtitle-1">
+          <span>
+            Tech Founder
+          </span>
+          <br>
+          <span>
+            Community Tools
+          </span>
+        </div>
 
-        <v-chip>Javascript</v-chip>
+        <!-- Location -->
+        <!-- <div class="mt-2">
+          <v-icon>mdi-map-marker</v-icon> Madrid
+        </div> -->
+        <!-- /Location -->
 
-        <v-chip>Community Management</v-chip>
-      </v-chip-group>
-    </v-card-text>
+        <!-- <v-chip-group
+          multiple
+          active-class="deep-purple accent-4 white--text"
+        >
+          <v-chip>Technology</v-chip>
+
+          <v-chip>UX</v-chip>
+
+          <v-chip>Javascript</v-chip>
+
+          <v-chip>Community Management</v-chip>
+        </v-chip-group> -->
+      </v-card-text>
+    </div>
   </v-card>
 </template>
 
