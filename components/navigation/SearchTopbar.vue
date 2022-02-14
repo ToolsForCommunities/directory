@@ -40,7 +40,7 @@
           </v-badge> -->
         </div>
         <span>Filters</span>
-          <!-- <v-badge
+        <!-- <v-badge
             inline
             content="2"
           >

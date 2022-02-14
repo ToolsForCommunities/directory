@@ -5,8 +5,7 @@
       title="People"
     />
     <v-container>
-      <v-sheet
-      >
+      <v-sheet>
         <v-chip-group
           multiple
           active-class="primary--text"
@@ -19,7 +18,7 @@
           </v-chip>
         </v-chip-group>
       </v-sheet>
-  </v-row>
+      </v-row>
 
       <!-- <p>
         <nuxt-link to="?aside=person/1">
@@ -42,7 +41,7 @@
       </v-row>
 
       <!-- Infinite scroll dispatcher -->
-      <div class="py-4" v-intersect="infiniteScrolling" />
+      <div v-intersect="infiniteScrolling" class="py-4" />
 
       <!--
       <v-virtual-scroll
