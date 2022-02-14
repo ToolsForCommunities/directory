@@ -12,19 +12,24 @@
     <v-card outlined class="ma-4">
       <v-toolbar
         flat
+        dense
       >
-        <v-btn icon class="d-lg-none d-xl-flex">
+        <v-btn
+          icon
+          class="d-lg-none d-xl-flex"
+          @click="$store.dispatch('aside/clear')"
+        >
           <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
         <v-toolbar-title>Filters</v-toolbar-title>
-        <v-spacer></v-spacer>
+        <v-spacer />
         <CTButton
           text
         >
           Clear all
         </CTButton>
       </v-toolbar>
-      <v-divider></v-divider>
+      <v-divider />
       <v-card elevation="0 px-4">
         <v-card-text>
           <h2 class="text-h6 mb-2">
@@ -74,7 +79,7 @@
             </v-chip>
           </v-chip-group>
         </v-card-text>
-        <v-divider></v-divider>
+        <v-divider />
         <v-card-text>
           <h2 class="text-h6 mb-2">
             All filters

@@ -51,7 +51,6 @@
     <v-divider />
 
     <div class="pa-4 lateral-scrollable">
-
       <!-- <p>{{ $store.state.aside }}</p> -->
 
       <!-- Content -->
@@ -78,9 +77,9 @@
             <div class="subtitle-1">
               <span>
                 Tech Founder <span>at</span>
-              <nuxt-link to="?aside=startup/1">
-                Community Tools
-              </nuxt-link>
+                <nuxt-link to="?aside=startup/1">
+                  Community Tools
+                </nuxt-link>
               </span>
             </div>
           </v-card-text>
@@ -155,28 +154,28 @@
           <div class="py-4">
             <span class="subtitle-1">Knowledge areas</span>
             <v-chip-group
-            v-model="amenities"
-            column
-            multiple
-          >
-            <v-chip
-              filter
-              outlined
+              v-model="amenities"
+              column
+              multiple
             >
-              Development
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Sales
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Beard Care
-            </v-chip>
+              <v-chip
+                filter
+                outlined
+              >
+                Development
+              </v-chip>
+              <v-chip
+                filter
+                outlined
+              >
+                Sales
+              </v-chip>
+              <v-chip
+                filter
+                outlined
+              >
+                Beard Care
+              </v-chip>
             </v-chip-group>
             <!-- <CTButton
               primary
@@ -191,28 +190,28 @@
           <div class="pb-4">
             <span class="subtitle-1">Needs help with</span>
             <v-chip-group
-            v-model="amenities"
-            column
-            multiple
-          >
-            <v-chip
-              filter
-              outlined
+              v-model="amenities"
+              column
+              multiple
             >
-              UX
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              UI Design
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Interior Design
-            </v-chip>
+              <v-chip
+                filter
+                outlined
+              >
+                UX
+              </v-chip>
+              <v-chip
+                filter
+                outlined
+              >
+                UI Design
+              </v-chip>
+              <v-chip
+                filter
+                outlined
+              >
+                Interior Design
+              </v-chip>
             </v-chip-group>
             <div class="pt-2">
               <CTButton
@@ -230,7 +229,7 @@
             </div>
           </div>
           <!-- /Help -->
-          <v-divider></v-divider>
+          <v-divider />
           <!-- Help -->
           <div class="py-4">
             <span class="subtitle-1">Social</span>
@@ -253,7 +252,6 @@
         </div>
         <!-- /Info -->
       </div>
-
     </div>
   </div>
 </template>

@@ -1,6 +1,8 @@
 <template>
   <v-card
     :loading="loading"
+    :to="`?aside=person/${id}`"
+    nuxt
     class="mx-auto my-1"
   >
     <template slot="progress">
@@ -13,31 +15,31 @@
 
     <v-img
       aspect-ratio="1"
-      src="https://codingcarlos.com/wp-content/uploads/2017/07/epic-yo-600x600.jpg"
+      :src="pic || '/img/nopic.png'"
     />
 
     <div>
       <v-card-title
         class="pb-0 pt-2 px-4 text-truncate d-block"
-        title="Carlos Hernadez Martin"
+        :title="fullname"
       >
-        Carlos Hernandez Martin
+        {{ fullname }}
       </v-card-title>
 
       <v-card-text>
         <div class="subtitle-1">
           <span>
-            Tech Founder
+            {{ startup && startup.role }}
           </span>
           <br>
           <span>
-            Community Tools
+            {{ startup && startup.name }}
           </span>
         </div>
 
         <!-- Location -->
         <!-- <div class="mt-2">
-          <v-icon>mdi-map-marker</v-icon> Madrid
+          <v-icon>mdi-map-marker</v-icon> {{ location }}
         </div> -->
         <!-- /Location -->
 
@@ -60,14 +62,50 @@
 
 <script>
 export default {
+  props: {
+    id: {
+      type: String,
+      default: '',
+      required: true
+    },
+    name: {
+      type: String,
+      default: '',
+      required: true
+    },
+    surname: {
+      type: String,
+      default: '',
+      required: false
+    },
+    pic: {
+      type: String,
+      default: '/img/nopic.png',
+      required: false
+    },
+    location: {
+      type: String,
+      default: '',
+      required: false
+    },
+    Group: {
+      type: Array,
+      default: () => [],
+      required: false
+    }
+  },
   data: () => ({
     loading: false
-  })
-  // created () {
-  //   this.loading = true
-
-  //   setTimeout(() => (this.loading = false), 2000)
-  // }
+  }),
+  computed: {
+    fullname () {
+      // ToDo: Check config, to see if we have to reverse name and surname
+      return `${this.name} ${this.surname}`
+    },
+    startup () {
+      return (this.Group && this.Group[0]) || null
+    }
+  }
 }
 </script>
 

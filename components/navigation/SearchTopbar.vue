@@ -29,7 +29,7 @@
         small
         text
         class="btn-labeled py-7 px-2 ml-3"
-        @click="$store.dispatch('aside/clear')"
+        @click="$store.dispatch('aside/set', 'filters')"
       >
         <div>
           <v-icon>mdi-tune</v-icon>
@@ -40,7 +40,7 @@
           </v-badge> -->
         </div>
         <span>Filters</span>
-          <!-- <v-badge
+        <!-- <v-badge
             inline
             content="2"
           >
