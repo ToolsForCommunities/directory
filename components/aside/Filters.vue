@@ -12,8 +12,13 @@
     <v-card outlined class="ma-4">
       <v-toolbar
         flat
+        dense
       >
-        <v-btn icon class="d-lg-none d-xl-flex">
+        <v-btn
+          icon
+          class="d-lg-none d-xl-flex"
+          @click="$store.dispatch('aside/clear')"
+        >
           <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
         <v-toolbar-title>Filters</v-toolbar-title>

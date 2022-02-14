@@ -10,33 +10,30 @@
           multiple
           active-class="primary--text"
         >
+          <v-chip @click="$store.dispatch('aside/set', 'filters')">
+            All filters
+          </v-chip>
           <v-chip
             v-for="tag in tags"
-            :key="tag"
+            :key="tag.id"
           >
-            {{ tag }}
+            {{ tag.name }}
           </v-chip>
         </v-chip-group>
       </v-sheet>
       </v-row>
 
-      <!-- <p>
-        <nuxt-link to="?aside=person/1">
-          I'm person 1
-        </nuxt-link>
-      </p> -->
-
       <v-row dense>
         <v-col
-          v-for="(item, i) in people"
-          :key="i"
+          v-for="person in people"
+          :key="person.id"
           cols="6"
           lg="4"
         >
-          <nuxt-link to="?aside=person/1">
-            <!-- I'm person 1 -->
-            <PersonCard />
-          </nuxt-link>
+          <PersonCard
+            v-bind="person"
+            :startup="person.Group && person.Group[0]"
+          />
         </v-col>
       </v-row>
 
@@ -90,22 +87,26 @@
 export default {
   data: () => ({
     // dummy
-    tags: [
-      'All filters',
-      'Developer',
-      'Sales',
-      'Marketing',
-      'Founder',
-      'Designer',
-      'Talent',
-      'Growth',
-      'Cloud'
-    ],
+    // tags: [
+    //   'All filters',
+    //   'Developer',
+    //   'Sales',
+    //   'Marketing',
+    //   'Founder',
+    //   'Designer',
+    //   'Talent',
+    //   'Growth',
+    //   'Cloud'
+    // ],
     // dummy
     itemsToShow: 12
   }),
   fetch () {
-    return this.$store.dispatch('people/list')
+    return Promise.all([
+      this.$store.dispatch('tag/list'),
+      this.$store.dispatch('people/list')
+    ])
+    // return this.$store.dispatch('people/list')
   },
   head: {
     title: 'People',
@@ -118,6 +119,9 @@ export default {
     ]
   },
   computed: {
+    tags () {
+      return this.$store.state.tag.list || []
+    },
     people () {
       if (this.itemsToShow === this.$store.state.people.list.length) {
         return this.$store.state.people.list
@@ -144,9 +148,6 @@ export default {
       return true
     }
   }
-  // created () {
-  //   this.$store.dispatch('people/list')
-  // }
 }
 </script>
 
@@ -159,4 +160,9 @@ export default {
   .ct-container__has-topbar {
     padding-top: 64px;
   }
+
+>>> .v-slide-group__prev--disabled,
+>>> .v-slide-group__next--disabled {
+  display: none;
+}
 </style>
