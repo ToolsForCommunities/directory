@@ -27,7 +27,7 @@
         <v-divider />
 
         <section class="pa-4">
-          <h3>Connect your Slack acoount</h3>
+          <h3>Connect your Slack account</h3>
           <p class="mb-0">
             Are you looking for other members with a specific expertise to help you grow your company?
           </p>
