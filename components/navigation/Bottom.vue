@@ -37,6 +37,9 @@ export default {
   display: flex;
   justify-content: center;
 }
+  >>> .bottombar-link .v-btn:not(.v-btn--round).v-size--x-large {
+    min-width: auto;
+  }
 
 .v-item-group.v-bottom-navigation .bottombar-link >>> .v-btn__content {
   flex-direction: column;
