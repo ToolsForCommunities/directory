@@ -1,15 +1,15 @@
 <template>
-  <!-- <div class="ct-container ct-container__has-topbar"> -->
   <div>
     <NavigationMainTopbar
       :title="$t('people.title')"
     />
     <v-container>
+      <!-- Filters -->
       <FilterList for="people" />
 
-      <!-- Person Cards Skeletons -->
+      <!-- Person Cards Skeletons (loading...) -->
       <v-row
-        v-if="$store.state.people.list.length === 0"
+        v-if="people.length === 0 && $store.state.people.list.loading"
         dense
       >
         <v-col
@@ -24,6 +24,11 @@
           />
         </v-col>
       </v-row>
+
+      <div v-else-if="people.length === 0">
+        No one found
+      </div>
+
       <!-- Person Cards -->
       <v-row
         v-else
@@ -54,11 +59,7 @@ export default {
     itemsToShow: 12
   }),
   fetch () {
-    return Promise.all([
-      this.$store.dispatch('tag/list'),
-      this.$store.dispatch('people/list')
-    ])
-    // return this.$store.dispatch('people/list')
+    return this.$store.dispatch('people/list')
   },
   head: {
     title: 'People',
@@ -71,25 +72,17 @@ export default {
     ]
   },
   computed: {
-    tags () {
-      return this.$store.state.tag.list || []
-    },
     people () {
-      if (this.itemsToShow >= this.$store.state.people.list.length) {
-        return this.$store.state.people.list
+      // const list = this.$store.state.people.list
+      const list = this.$store.getters['people/selected']
+
+      if (this.itemsToShow >= list.length) {
+        return list
       }
 
-      return this.$store.state.people.list.slice(0, this.itemsToShow)
+      return list.slice(0, this.itemsToShow)
     }
   },
-  // created () {
-  //   if (this.$store.state.people.list.length === 0) {
-  //     this.$store.dispatch('people/list')
-  //   }
-  //   if (this.$store.state.tag.list.length === 0) {
-  //     this.$store.dispatch('tag/list')
-  //   }
-  // },
   methods: {
     infiniteScrolling () {
       const itemsToAdd = 9
@@ -121,9 +114,4 @@ export default {
   .ct-container__has-topbar {
     padding-top: 64px;
   }
-
->>> .v-slide-group__prev--disabled,
->>> .v-slide-group__next--disabled {
-  display: none;
-}
 </style>
