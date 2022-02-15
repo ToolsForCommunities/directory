@@ -2,43 +2,102 @@
   <!-- <div class="ct-container ct-container__has-topbar"> -->
   <div>
     <NavigationMainTopbar
-      title="Startups"
+      :title="$t('startups.title')"
     />
     <v-container>
-      <p>
-        <nuxt-link to="?aside=startup/2">
-          I'm startup 2
-        </nuxt-link>
-        <nuxt-link to="?aside=startup/4">
-          I'm startup 4
-        </nuxt-link>
-      </p>
+      <FilterList for="startup" />
 
-      <v-row dense>
+      <!-- Startup Cards Skeletons -->
+      <v-row
+        v-if="$store.state.startup.list.length === 0"
+        dense
+      >
         <v-col
-          v-for="i in 9"
+          v-for="i in 6"
           :key="i"
           cols="6"
           lg="4"
         >
-          <PersonCard />
+          <v-skeleton-loader
+            v-bind="attrs"
+            type="image, article"
+          />
         </v-col>
       </v-row>
+      <!-- Startup Cards -->
+      <v-row
+        v-else
+        dense
+      >
+        <v-col
+          v-for="group in startups"
+          :key="group.id"
+          cols="6"
+          lg="4"
+        >
+          <StartupCard
+            v-bind="group"
+          />
+        </v-col>
+      </v-row>
+
+      <!-- Infinite scroll dispatcher -->
+      <div v-intersect="infiniteScrolling" class="py-4" />
     </v-container>
   </div>
 </template>
 
 <script>
 export default {
+  data: () => ({
+    itemsToShow: 12
+  }),
+  fetch () {
+    return Promise.all([
+      this.$store.dispatch('tag/list'),
+      this.$store.dispatch('startup/list')
+    ])
+  },
   head: {
-    title: 'People',
+    title: 'Startups',
     meta: [
       {
         hid: 'description',
         name: 'description',
-        content: 'All the people in your directory'
+        content: 'All the startups in your directory'
       }
     ]
+  },
+  computed: {
+    tags () {
+      return this.$store.state.tag.list || []
+    },
+    startups () {
+      if (this.itemsToShow >= this.$store.state.startup.list.length) {
+        return this.$store.state.startup.list
+      }
+
+      return this.$store.state.startup.list.slice(0, this.itemsToShow)
+    }
+  },
+  methods: {
+    infiniteScrolling () {
+      const itemsToAdd = 9
+
+      if (this.$store.state.startup.list.length === 0) {
+        return false
+      }
+
+      if (this.itemsToShow === this.$store.state.startup.list.length) {
+        return false
+      } else if (this.itemsToShow + itemsToAdd >= this.$store.state.startup.list.length) {
+        this.itemsToShow = this.$store.state.startup.list.length
+      } else {
+        this.itemsToShow += itemsToAdd
+      }
+
+      return true
+    }
   }
 }
 </script>
@@ -52,4 +111,9 @@ export default {
   .ct-container__has-topbar {
     padding-top: 64px;
   }
+
+>>> .v-slide-group__prev--disabled,
+>>> .v-slide-group__next--disabled {
+  display: none;
+}
 </style>
