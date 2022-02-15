@@ -14,7 +14,8 @@
     </template>
 
     <v-img
-      aspect-ratio="1"
+      :aspect-ratio="1"
+      :cover="false"
       :src="pic || '/img/nopic.png'"
     />
 
@@ -27,7 +28,7 @@
       </v-card-title>
 
       <v-card-text>
-        <div class="subtitle-1">
+        <div class="subtitle-1 text-truncate">
           <span>
             {{ startup && startup.role }}
           </span>
@@ -111,6 +112,9 @@ export default {
 
 <style scoped>
 .v-card__title {
-  /*background-color: green;*/
+  /* background-color: green;*/
+}
+.v-image__image {
+  object-fit: cover;
 }
 </style>

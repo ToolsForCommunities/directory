@@ -7,8 +7,13 @@
       <h1>
         {{ title }}
       </h1>
+      <v-spacer></v-spacer>
+      <CTButton
+        text
+      >
+        Add new
+      </CTButton>
     </v-app-bar>
-
     <v-divider style="position: absolute; width: 100%" />
   </div>
 </template>
