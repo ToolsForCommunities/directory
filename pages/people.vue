@@ -5,24 +5,7 @@
       :title="$t('people.title')"
     />
     <v-container>
-      <v-sheet>
-        <v-chip-group
-          multiple
-          active-class="primary--text"
-        >
-          <v-chip @click="$store.dispatch('aside/set', 'filters')">
-            {{ $t('filters.all') }}
-            <!-- All filters -->
-          </v-chip>
-          <v-chip
-            v-for="tag in tags"
-            :key="tag.id"
-          >
-            {{ tag.name }}
-          </v-chip>
-        </v-chip-group>
-      </v-sheet>
-      </v-row>
+      <FilterList for="people" />
 
       <!-- Person Cards Skeletons -->
       <v-row
@@ -66,7 +49,6 @@
 </template>
 
 <script>
-
 export default {
   data: () => ({
     itemsToShow: 12
