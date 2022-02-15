@@ -1,17 +1,21 @@
 module.exports = {
-  HELLO: 'Hello',
-  techList: [
-    {
-      title: 'nuxt',
-      content: 'All about Nuxt'
-    },
-    {
-      title: 'vue',
-      content: 'All about vue'
-    },
-    {
-      title: 'webpack',
-      content: 'All about webpack'
-    }
-  ]
+  home: {
+    title: 'Home',
+    navigationName: 'Home'
+  },
+  people: {
+    title: 'People',
+    navigationName: 'People'
+  },
+  startups: {
+    title: 'Startups',
+    navigationName: 'Startups'
+  },
+  more: {
+    title: 'More',
+    navigationName: 'More'
+  },
+  filters: {
+    all: 'All filters'
+  }
 }

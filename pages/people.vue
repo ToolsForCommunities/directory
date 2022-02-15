@@ -2,7 +2,7 @@
   <!-- <div class="ct-container ct-container__has-topbar"> -->
   <div>
     <NavigationMainTopbar
-      title="People"
+      :title="$t('people.title')"
     />
     <v-container>
       <v-sheet>
@@ -11,7 +11,8 @@
           active-class="primary--text"
         >
           <v-chip @click="$store.dispatch('aside/set', 'filters')">
-            All filters
+            {{ $t('filters.all') }}
+            <!-- All filters -->
           </v-chip>
           <v-chip
             v-for="tag in tags"
@@ -23,7 +24,28 @@
       </v-sheet>
       </v-row>
 
-      <v-row dense>
+      <!-- Person Cards Skeletons -->
+      <v-row
+        v-if="$store.state.people.list.length === 0"
+        dense
+      >
+        <v-col
+          v-for="i in 6"
+          :key="i"
+          cols="6"
+          lg="4"
+        >
+          <v-skeleton-loader
+            v-bind="attrs"
+            type="image, article"
+          />
+        </v-col>
+      </v-row>
+      <!-- Person Cards -->
+      <v-row
+        v-else
+        dense
+      >
         <v-col
           v-for="person in people"
           :key="person.id"
@@ -71,19 +93,28 @@ export default {
       return this.$store.state.tag.list || []
     },
     people () {
-      if (this.itemsToShow === this.$store.state.people.list.length) {
+      if (this.itemsToShow >= this.$store.state.people.list.length) {
         return this.$store.state.people.list
       }
 
       return this.$store.state.people.list.slice(0, this.itemsToShow)
-    },
-    itemHeigth () {
-      return 398
     }
   },
+  // created () {
+  //   if (this.$store.state.people.list.length === 0) {
+  //     this.$store.dispatch('people/list')
+  //   }
+  //   if (this.$store.state.tag.list.length === 0) {
+  //     this.$store.dispatch('tag/list')
+  //   }
+  // },
   methods: {
     infiniteScrolling () {
       const itemsToAdd = 9
+
+      if (this.$store.state.people.list.length === 0) {
+        return false
+      }
 
       if (this.itemsToShow === this.$store.state.people.list.length) {
         return false

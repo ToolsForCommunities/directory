@@ -26,7 +26,8 @@ export default {
       {
         name: 'Search',
         icon: 'mdi-magnify',
-        route: '/search'
+        route: '/search',
+        staticIcon: true
       },
       {
         name: 'People',
