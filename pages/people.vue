@@ -3,9 +3,9 @@
     <NavigationMainTopbar
       :title="$t('people.title')"
     />
-    <v-container>
+    <v-container class="pt-0 mt-2">
       <!-- Filters -->
-      <FilterList for="people" />
+      <FilterList for="people" class="mb-1" />
 
       <!-- Person Cards Skeletons (loading...) -->
       <v-row
