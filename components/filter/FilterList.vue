@@ -6,15 +6,32 @@
       active-class="primary--text"
       @change="addFilter"
     >
-      <v-chip @click="allFilters">
-        {{ $t('filters.all') }}
+      <v-chip
+        @click="allFilters"
+        outlined
+        class="px-1"
+      >
+        <v-icon class="pa-0 ma-0">
+          mdi-tune
+        </v-icon>
+        <!-- {{ $t('filters.all') }} -->
         <!-- All filters -->
       </v-chip>
       <v-chip
         v-for="tag in tags"
         :key="tag.id"
+        :input-value="active"
+        filter
+        outlined
       >
         {{ tag.name }}
+      </v-chip>
+      <v-chip
+        @click="allFilters"
+        outlined
+      >
+        {{ $t('filters.all') }}
+        <!-- All filters -->
       </v-chip>
     </v-chip-group>
   </v-sheet>
