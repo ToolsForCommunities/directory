@@ -14,8 +14,7 @@
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
 
-      <v-toolbar-title class="pl-2">
-        Profile
+      <v-toolbar-title class="pl-2 text-truncate">
       </v-toolbar-title>
 
       <v-spacer />
