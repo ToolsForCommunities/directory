@@ -1,9 +1,11 @@
 <template>
   <v-card
     :loading="loading"
-    :to="`?aside=person/${id}`"
+    :to="`?aside=startup/${id}`"
     nuxt
     class="mx-auto my-1"
+    flat
+    outlined
   >
     <template slot="progress">
       <v-progress-linear
@@ -18,27 +20,22 @@
       :cover="false"
       :src="logo || '/img/nologo.png'"
     />
-
+    <v-divider/>
     <div>
       <v-card-title
-        class="pb-4 pt-2 px-4 text-truncate d-block"
+        class="pt-2 pb-0 px-4 text-truncate d-block"
         :title="name"
       >
         {{ name }}
       </v-card-title>
 
-      <!--
       <v-card-text>
         <div class="subtitle-1 text-truncate">
           <span>
-            {{ startup && startup.role }}
-          </span>
-          <br>
-          <span>
-            {{ startup && startup.name }}
+            Tetuan Valley
           </span>
         </div>
-      </v-card-text> -->
+      </v-card-text>
     </div>
   </v-card>
 </template>
