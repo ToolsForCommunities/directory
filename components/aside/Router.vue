@@ -6,6 +6,9 @@
     <!-- Person -->
     <AsidePerson v-else-if="$store.state.aside.current === 'person'" />
 
+    <!-- Startup -->
+    <AsideStartup v-else-if="$store.state.aside.current === 'startup'" />
+
     <!-- Filters -->
     <AsideFilters v-else-if="$store.state.aside.current === 'filters'" />
 
