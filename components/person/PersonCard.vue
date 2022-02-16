@@ -4,6 +4,8 @@
     :to="`?aside=person/${id}`"
     nuxt
     class="mx-auto my-1"
+    flat
+    outlined
   >
     <template slot="progress">
       <v-progress-linear
@@ -18,6 +20,8 @@
       :cover="false"
       :src="pic || '/img/nopic.png'"
     />
+
+    <v-divider/>
 
     <div>
       <v-card-title
