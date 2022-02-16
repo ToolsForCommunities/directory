@@ -174,4 +174,15 @@ export default {
   flex-direction: column;
   text-transform: none;
 }
+
+@media screen  and (max-width: 956px) {
+
+  .search-box {
+    height: 40px;
+  }
+  >>> .v-text-field.v-text-field--solo .v-input__control {
+    min-height: 40px;
+  }
+
+}
 </style>
