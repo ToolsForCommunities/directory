@@ -1,5 +1,5 @@
 <template>
-  <div class="aside-card ma-4 mb-0">
+  <div class="aside-card ma-md-4 ma-0 mb-0">
     <v-toolbar
       dense
       flat
@@ -84,7 +84,7 @@
             </div>
           </v-card-text>
           <!-- /Job description -->
-          <!-- Conntect CTA -->
+          <!-- Connect CTA -->
           <div class="text-center">
             <CTButton
               primary
@@ -99,8 +99,7 @@
               Mail
             </CTButton>
           </div>
-          <!-- /Conntect CTA -->
-          <!-- <v-divider></v-divider> -->
+          <!-- /Connect CTA -->
           <!-- About -->
           <div class="py-4">
             <span class="subtitle-1">About Carlos</span>
@@ -230,10 +229,11 @@
           </div>
           <!-- /Help -->
           <v-divider />
-          <!-- Help -->
+          <!-- Social -->
           <div class="py-4">
             <span class="subtitle-1">Social</span>
             <v-list>
+              <!-- Component starts here -->
               <v-list-item>
                 <v-list-item-icon>
                   <v-icon color="#757575">
@@ -246,9 +246,22 @@
                   <v-list-item-subtitle>@CodingCarlos</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
+              <!-- Component ends here -->
+              <v-list-item>
+                <v-list-item-icon>
+                  <v-icon color="#757575">
+                    mdi-facebook
+                  </v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-list-item-title>Facebook</v-list-item-title>
+                  <v-list-item-subtitle>Carlos Hernández</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
             </v-list>
           </div>
-          <!-- /Help -->
+          <!-- /Social -->
         </div>
         <!-- /Info -->
       </div>
@@ -271,4 +284,16 @@
   max-height: calc(100vh - 48px - 32px);
   overflow-y: scroll;
 }
+
+@media screen and (max-width: 959px) {
+
+  /* removes border from profile view in mobile */
+  /* should be a global class for other views like filters */
+  .aside-card {
+    border-radius: none;
+    border: none;
+  }
+
+}
+
 </style>
