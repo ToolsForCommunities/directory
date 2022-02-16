@@ -11,6 +11,9 @@
       <CTButton
         text
       >
+        <!-- <v-icon left>
+          mdi-plus-circle
+        </v-icon> -->
         Add new
       </CTButton>
     </v-app-bar>
