@@ -16,6 +16,6 @@ module.exports = {
     navigationName: 'More'
   },
   filters: {
-    all: 'All filters'
+    all: 'More filters'
   }
 }
