@@ -31,7 +31,8 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'material-design-icons-iconfont/dist/material-design-icons.css'
+    'material-design-icons-iconfont/dist/material-design-icons.css',
+    'assets/globals.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

@@ -1,68 +1,73 @@
 <template>
-  <v-card
-    :loading="loading"
-    :to="`?aside=person/${id}`"
-    nuxt
-    class="mx-auto my-1"
-    flat
-    outlined
-  >
-    <template slot="progress">
-      <v-progress-linear
-        color="deep-purple"
-        height="4"
-        indeterminate
-      />
-    </template>
-
-    <v-img
-      :aspect-ratio="1"
-      :cover="false"
-      :src="pic || '/img/nopic.png'"
-    />
-
-    <v-divider/>
-
-    <div>
-      <v-card-title
-        class="pb-0 pt-2 px-4 text-truncate d-block"
-        :title="fullname"
+  <v-hover>
+    <template #default="{ hover }">
+      <v-card
+        :elevation="hover ? 12 : 0"
+        :loading="loading"
+        :to="`?aside=person/${id}`"
+        nuxt
+        class="mx-auto my-1 "
+        flat
+        outlined
       >
-        {{ fullname }}
-      </v-card-title>
+        <template slot="progress">
+          <v-progress-linear
+            color="deep-purple"
+            height="4"
+            indeterminate
+          />
+        </template>
 
-      <v-card-text>
-        <div class="subtitle-1 text-truncate">
-          <span>
-            {{ startup && startup.role }}
-          </span>
-          <br>
-          <span>
-            {{ startup && startup.name }}
-          </span>
+        <v-img
+          :aspect-ratio="1"
+          contain
+          :src="pic || '/img/nopic.png'"
+        />
+
+        <v-divider />
+
+        <div>
+          <v-card-title
+            class="pb-0 pt-2 px-4 text-truncate d-block"
+            :title="fullname"
+          >
+            {{ fullname }}
+          </v-card-title>
+
+          <v-card-text>
+            <div class="subtitle-1 text-truncate">
+              <span>
+                {{ startup && startup.role }}
+              </span>
+              <br>
+              <span>
+                {{ startup && startup.name }}
+              </span>
+            </div>
+
+            <!-- Location -->
+            <!-- <div class="mt-2">
+              <v-icon>mdi-map-marker</v-icon> {{ location }}
+            </div> -->
+            <!-- /Location -->
+
+            <!-- <v-chip-group
+              multiple
+              active-class="deep-purple accent-4 white--text"
+            >
+              <v-chip>Technology</v-chip>
+
+              <v-chip>UX</v-chip>
+
+              <v-chip>Javascript</v-chip>
+
+              <v-chip>Community Management</v-chip>
+            </v-chip-group> -->
+          </v-card-text>
         </div>
-
-        <!-- Location -->
-        <!-- <div class="mt-2">
-          <v-icon>mdi-map-marker</v-icon> {{ location }}
-        </div> -->
-        <!-- /Location -->
-
-        <!-- <v-chip-group
-          multiple
-          active-class="deep-purple accent-4 white--text"
-        >
-          <v-chip>Technology</v-chip>
-
-          <v-chip>UX</v-chip>
-
-          <v-chip>Javascript</v-chip>
-
-          <v-chip>Community Management</v-chip>
-        </v-chip-group> -->
-      </v-card-text>
-    </div>
-  </v-card>
+      </v-card>
+    </template>
+  </v-hover>
 </template>
 
 <script>

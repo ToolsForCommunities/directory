@@ -23,17 +23,17 @@
     </NavigationSearchTopbar>
     <v-container>
       <v-tabs-items v-model="tab">
-        <!-- <v-tab-item>
+        <v-tab-item>
           <h2>All results</h2>
         </v-tab-item>
 
         <v-tab-item>
-          <h2>People found</h2>
+          <PersonCardList :people="people" />
         </v-tab-item>
 
         <v-tab-item>
-          <h2>Startups found</h2>
-        </v-tab-item> -->
+          <StartupCardList :startups="startups" />
+        </v-tab-item>
       </v-tabs-items>
     </v-container>
   </div>
@@ -42,8 +42,29 @@
 <script>
 export default {
   data: () => ({
-    tab: null
-  })
+    tab: null,
+    peopleToShow: 12,
+    startupsToShow: 12
+  }),
+  computed: {
+    people () {
+      // const list = this.$store.state.people.list
+      const list = this.$store.getters['people/selected']
+
+      if (this.peopleToShow >= list.length) {
+        return list
+      }
+
+      return list.slice(0, this.peopleToShow)
+    },
+    startups () {
+      if (this.startupsToShow >= this.$store.state.startup.list.length) {
+        return this.$store.state.startup.list
+      }
+
+      return this.$store.state.startup.list.slice(0, this.startupsToShow)
+    }
+  }
 }
 </script>
 
