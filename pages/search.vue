@@ -3,6 +3,7 @@
   <div>
     <NavigationSearchTopbar
       title="Search"
+      @search="search"
     >
       <v-tabs
         slot="extension"
@@ -63,6 +64,11 @@ export default {
       }
 
       return this.$store.state.startup.list.slice(0, this.startupsToShow)
+    }
+  },
+  methods: {
+    search (text) {
+      console.log(text)
     }
   }
 }

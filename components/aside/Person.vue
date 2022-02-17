@@ -14,8 +14,7 @@
         <v-icon>mdi-arrow-left</v-icon>
       </v-btn>
 
-      <v-toolbar-title class="pl-2 text-truncate">
-      </v-toolbar-title>
+      <v-toolbar-title class="pl-2 text-truncate" />
 
       <v-spacer />
 
@@ -57,7 +56,7 @@
         <!-- Picture -->
         <v-img
           aspect-ratio="1"
-          src="https://codingcarlos.com/wp-content/uploads/2017/07/epic-yo-600x600.jpg"
+          :src="person.pic || '/img/nopic.vue'"
           class="rounded"
         />
         <!-- /Picture -->
@@ -68,16 +67,19 @@
             class="pb-0 pt-2 pa-0 ma-0 text-center d-block"
             title="Carlos Hernadez Martin"
           >
-            Carlos Hernandez Martin
+            {{ fullname }}
           </v-card-title>
           <!-- /Name -->
           <!-- Job description -->
-          <v-card-text class="pa-0 ma-0 text-center">
+          <v-card-text
+            v-if="startup"
+            class="pa-0 ma-0 text-center"
+          >
             <div class="subtitle-1">
               <span>
-                Tech Founder <span>at</span>
+                {{ startup.role }} <span>at</span>
                 <nuxt-link to="?aside=startup/1">
-                  Community Tools
+                  {{ startup.name }}
                 </nuxt-link>
               </span>
             </div>
@@ -101,116 +103,68 @@
           <!-- /Connect CTA -->
           <!-- About -->
           <div class="py-4">
-            <span class="subtitle-1">About Carlos</span>
+            <span class="subtitle-1">About {{ person.name }}</span>
             <!-- Bio -->
             <div class="body-2">
               <span>
-                Showman, barbudo, liante, developer y contador de cuentos. Conecto gente en @ToolsCommunity. Charlo en @commitsans, @os_weekends y @AbrimosMelon. Tengo tierras.
+                {{ person.bio }}
               </span>
             </div>
             <!-- /Bio -->
             <!-- Chips -->
             <v-chip-group
-              v-model="amenities"
               column
               multiple
               class="pt-2"
             >
               <v-chip
+                v-if="person.location"
                 filter
                 outlined
               >
                 <v-icon left color="#757575">
                   mdi-map-marker
                 </v-icon>
-                Madrid / Floor 2
+                {{ person.location }}
               </v-chip>
               <v-chip
+                v-if="person.program"
                 filter
                 outlined
               >
                 <v-icon left color="#757575">
                   mdi-account-group
                 </v-icon>
-                Tetuan Valley
+                {{ person.program }}
               </v-chip>
               <v-chip
+                v-if="person.joinedAt"
                 filter
                 outlined
               >
                 <v-icon left color="#757575">
                   mdi-calendar
                 </v-icon>
-                Member since 2015
+                Member since {{ person.joinedAt }}
               </v-chip>
             </v-chip-group>
             <!-- /Chips -->
           </div>
           <!-- /About -->
           <v-divider />
-          <!-- Help -->
-          <div class="py-4">
+
+          <!-- Skills -->
+          <div v-if="skills.length > 0" class="py-4">
             <span class="subtitle-1">Knowledge areas</span>
-            <v-chip-group
-              v-model="amenities"
-              column
-              multiple
-            >
-              <v-chip
-                filter
-                outlined
-              >
-                Development
-              </v-chip>
-              <v-chip
-                filter
-                outlined
-              >
-                Sales
-              </v-chip>
-              <v-chip
-                filter
-                outlined
-              >
-                Beard Care
-              </v-chip>
-            </v-chip-group>
-            <!-- <CTButton
-              primary
-              text
-              class="mt-2"
-            >
-              Ask for help
-            </CTButton> -->
+            <TagList :tags="skills" />
           </div>
-          <!-- /Help -->
-          <!-- Help -->
-          <div class="pb-4">
+          <!-- /Skills -->
+
+          <!-- Interests -->
+          <div v-if="interests.length > 0" class="pb-4">
             <span class="subtitle-1">Needs help with</span>
-            <v-chip-group
-              v-model="amenities"
-              column
-              multiple
-            >
-              <v-chip
-                filter
-                outlined
-              >
-                UX
-              </v-chip>
-              <v-chip
-                filter
-                outlined
-              >
-                UI Design
-              </v-chip>
-              <v-chip
-                filter
-                outlined
-              >
-                Interior Design
-              </v-chip>
-            </v-chip-group>
+            <TagList :tags="interests" />
+
             <div class="pt-2">
               <CTButton
                 primary
@@ -222,43 +176,17 @@
                 primary
                 text
               >
-                Help Carlos
+                Help {{ person.name }}
               </CTButton>
             </div>
           </div>
-          <!-- /Help -->
+          <!-- /Interests -->
+
           <v-divider />
+
           <!-- Social -->
           <div class="py-4">
-            <span class="subtitle-1">Social</span>
-            <v-list>
-              <!-- Component starts here -->
-              <v-list-item>
-                <v-list-item-icon>
-                  <v-icon color="#757575">
-                    mdi-twitter
-                  </v-icon>
-                </v-list-item-icon>
-
-                <v-list-item-content>
-                  <v-list-item-title>Twitter</v-list-item-title>
-                  <v-list-item-subtitle>@CodingCarlos</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-              <!-- Component ends here -->
-              <v-list-item>
-                <v-list-item-icon>
-                  <v-icon color="#757575">
-                    mdi-facebook
-                  </v-icon>
-                </v-list-item-icon>
-
-                <v-list-item-content>
-                  <v-list-item-title>Facebook</v-list-item-title>
-                  <v-list-item-subtitle>Carlos Hernández</v-list-item-subtitle>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list>
+            <SocialProfiles :item="person" />
           </div>
           <!-- /Social -->
         </div>
@@ -267,6 +195,52 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    person () {
+      // ToDo: Is this a mixin?
+      const aside = this.$route.query.aside
+      if (!aside) {
+        return {}
+      }
+
+      const id = aside.split('/')[1] || null
+      if (!id) {
+        return {}
+      }
+
+      return this.$store.getters['people/getById'](id)
+    },
+    fullname () {
+      // ToDo: Check if order should be inverted
+      return `${this.person.name} ${this.person.surname}`
+    },
+    startup () {
+      if (!this.person || !this.person.Group || !this.person.Group[0]) {
+        return null
+      }
+
+      return this.person.Group[0]
+    },
+    skills () {
+      if (!this.person || !this.person.Tag || !Array.isArray(this.person.Tag)) {
+        return []
+      }
+
+      return this.person.Tag.filter(tag => tag.relations.includes('HAS_SKILL'))
+    },
+    interests () {
+      if (!this.person || !this.person.Tag || !Array.isArray(this.person.Tag)) {
+        return []
+      }
+
+      return this.person.Tag.filter(tag => tag.relations.includes('HAS_INTEREST'))
+    }
+  }
+}
+</script>
 
 <style scoped>
 .aside-card {

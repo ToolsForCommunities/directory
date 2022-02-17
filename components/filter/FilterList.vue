@@ -7,9 +7,9 @@
       @change="addFilter"
     >
       <v-chip
-        @click="allFilters"
         outlined
         class="px-1"
+        @click="allFilters"
       >
         <v-icon class="pa-0 ma-0">
           mdi-tune
@@ -20,15 +20,14 @@
       <v-chip
         v-for="tag in tags"
         :key="tag.id"
-        :input-value="active"
         filter
         outlined
       >
         {{ tag.name }}
       </v-chip>
       <v-chip
-        @click="allFilters"
         outlined
+        @click="allFilters"
       >
         {{ $t('filters.all') }}
         <!-- All filters -->

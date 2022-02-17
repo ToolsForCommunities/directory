@@ -61,20 +61,20 @@
 
 function searchOpen () {
   this.searching = true
-  this.$ga.event('search', 'search_open')
+  // this.$ga.event('search', 'search_open')
 }
 
 function searchClose () {
   this.searching = false
-  this.$ga.event('search', 'search_back')
+  // this.$ga.event('search', 'search_back')
 }
 
 function searchClear () {
-  this.$ga.event('search', 'search_clear')
+  // this.$ga.event('search', 'search_clear')
 }
 
 function trackSearch (search) {
-  this.$ga.event('search', 'search_type', search)
+  // this.$ga.event('search', 'search_type', search)
 }
 
 export default {
@@ -132,6 +132,11 @@ export default {
     searchPlaceholder () {
       return 'Try RatedPower, Andrea or UX'
       // return this.config.searchPlaceholder || 'Try RatedPower, Andrea or UX'
+    }
+  },
+  watch: {
+    search (value) {
+      this.$emit('search', value)
     }
   },
   methods: {
