@@ -85,6 +85,7 @@
             </div>
           </v-card-text>
           <!-- /Job description -->
+
           <!-- Connect CTA -->
           <div class="text-center">
             <CTButton
@@ -101,9 +102,11 @@
             </CTButton>
           </div>
           <!-- /Connect CTA -->
+
           <!-- About -->
           <div class="py-4">
             <span class="subtitle-1">About {{ person.name }}</span>
+
             <!-- Bio -->
             <div class="body-2">
               <span>
@@ -111,6 +114,7 @@
               </span>
             </div>
             <!-- /Bio -->
+
             <!-- Chips -->
             <v-chip-group
               column
@@ -151,6 +155,7 @@
             <!-- /Chips -->
           </div>
           <!-- /About -->
+
           <v-divider />
 
           <!-- Skills -->
@@ -200,17 +205,7 @@
 export default {
   computed: {
     person () {
-      // ToDo: Is this a mixin?
-      const aside = this.$route.query.aside
-      if (!aside) {
-        return {}
-      }
-
-      const id = aside.split('/')[1] || null
-      if (!id) {
-        return {}
-      }
-
+      const id = this.$store.state.aside.id
       return this.$store.getters['people/getById'](id)
     },
     fullname () {
@@ -254,8 +249,8 @@ export default {
 }
 
 .lateral-scrollable {
-  max-height: calc(100vh - 48px - 32px);
-  overflow-y: scroll;
+  max-height: calc(100vh - 52px - 32px);
+  overflow-y: auto;
 }
 
 @media screen and (max-width: 959px) {
