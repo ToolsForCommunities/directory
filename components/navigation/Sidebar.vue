@@ -19,6 +19,7 @@
         <CTNavigationButton
           :icon="item.icon"
           :active="$route.path === item.route"
+          :static-icon="item.staticIcon"
           class="my-0"
         >
           {{ item.name }}
