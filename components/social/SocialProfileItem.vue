@@ -24,8 +24,8 @@ export default {
       default: () => ({})
     },
     link: {
-      type: Object,
-      default: () => ({})
+      type: String,
+      default: ''
     }
   }
 }

@@ -49,12 +49,10 @@
             </span>
           </div>
           <!-- /Bio -->
+
           <!-- Chips -->
-          <v-chip-group
-            column
-            multiple
-            class="pt-2"
-          >
+          <div>
+            <!-- Location -->
             <v-chip
               filter
               outlined
@@ -64,16 +62,21 @@
               </v-icon>
               {{ startup.location }}
             </v-chip>
+
+            <!-- Programs -->
             <v-chip
-              filter
+              v-for="program in startup.program.split(',')"
+              :key="program"
               outlined
             >
               <v-icon left color="#757575">
                 mdi-account-group
               </v-icon>
-              Tetuan Valley
+              {{ program }}
             </v-chip>
-            <v-chip
+
+            <!-- Member since -->
+            <!-- <v-chip
               filter
               outlined
             >
@@ -81,8 +84,8 @@
                 mdi-calendar
               </v-icon>
               Member since 2015
-            </v-chip>
-          </v-chip-group>
+            </v-chip> -->
+          </div>
           <!-- /Chips -->
         </div>
         <!-- /About -->
@@ -93,7 +96,6 @@
         <div class="py-4">
           <span class="subtitle-1">Verticals</span>
           <v-chip-group
-            v-model="amenities"
             column
             multiple
           >
@@ -126,12 +128,39 @@
         </div>
         <!-- /Tags -->
 
+        <!-- Skills -->
+        <div v-if="startup.Tag && startup.Tag.length > 0" class="py-4">
+          <span class="subtitle-1">Knowledge areas</span>
+          <TagList :tags="startup.Tag" />
+        </div>
+        <!-- /Skills -->
+
         <v-divider />
 
         <!-- Team -->
         <div class="py-4">
           <span class="subtitle-1">Team</span>
           <v-list>
+            <!-- Component starts here -->
+            <!--
+             <v-list-item
+              v-for="person in startup.Person"
+              :key="person.id"
+            >
+              <v-list-item-avatar>
+                <v-img src="person.pic"></v-img>
+              </v-list-item-avatar>
+
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{ person.name }}
+                </v-list-item-title>
+                <v-list-item-subtitle>
+                  {{ person.role }}
+                </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item> -->
+
             <!-- Component starts here -->
             <v-list-item>
               <v-list-item-avatar>
@@ -188,7 +217,55 @@ export default {
     startup () {
       const id = this.$store.state.aside.id
       return this.$store.getters['startup/getById'](id) || {}
+    },
+    // REVIEW THIS: Is this part of store?
+    config () {
+      return {}
+    },
+    tagCategories () {
+      if (!this.config.startupTagCategories || this.config.startupTagCategories.length === 0) {
+        return []
+      }
+
+      const categories = this.config.startupTagCategories.split(',')
+
+      return categories.map(categoryName => ({
+        name: categoryName,
+        tags: this.tagsByCategory(categoryName)
+      })).filter(category => category.tags.length > 0)
+    },
+    tags () {
+      let onlyUncategorized = false
+      if (this.tagCategories.length > 0) {
+        onlyUncategorized = true
+      }
+
+      return this.tagsByCategory('', onlyUncategorized)
     }
+    // --- END REVIEW ---
+  },
+  methods: {
+    // REVIEW THIS CODE!! Is this part of store?
+    tagsByCategory (category, onlyUncategorized) {
+      // Has no tags
+      if (!this.startup.Tag) {
+        return []
+      }
+
+      if (onlyUncategorized) {
+        return this.startup.Tag.filter(tag => !tag.category)
+      }
+
+      // No category defined, return all tags
+      if (!category) {
+        return this.startup.Tag
+      }
+
+      return this.startup.Tag.filter((tag) => {
+        return tag.category && tag.category.toUpperCase() === category.toUpperCase()
+      })
+    }
+    // --- END REVIEW ---
   }
 }
 </script>

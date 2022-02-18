@@ -24,16 +24,25 @@
     </NavigationSearchTopbar>
     <v-container>
       <v-tabs-items v-model="tab">
+        <!-- All tab -->
         <v-tab-item>
           <h2>All results</h2>
         </v-tab-item>
 
+        <!-- People tab -->
         <v-tab-item>
           <PersonCardList :people="people" />
+
+          <!-- Infinite scroll dispatcher -->
+          <div v-intersect="infiniteScrolling('people')" class="py-4" />
         </v-tab-item>
 
+        <!-- Startup tab -->
         <v-tab-item>
           <StartupCardList :startups="startups" />
+
+          <!-- Infinite scroll dispatcher -->
+          <div v-intersect="infiniteScrolling('startups')" class="py-4" />
         </v-tab-item>
       </v-tabs-items>
     </v-container>
@@ -47,6 +56,12 @@ export default {
     peopleToShow: 12,
     startupsToShow: 12
   }),
+  fetch () {
+    return Promise.all([
+      this.$store.dispatch('people/list'),
+      this.$store.dispatch('startup/list')
+    ])
+  },
   computed: {
     people () {
       // const list = this.$store.state.people.list
@@ -69,6 +84,36 @@ export default {
   methods: {
     search (text) {
       console.log(text)
+    },
+    infiniteScrolling (page) {
+      const itemsToAdd = 9
+
+      let itemsToShow = 0
+      if (page === 'people') {
+        itemsToShow = this.peopleToShow
+      } else if (page === 'startups') {
+        itemsToShow = this.startupsToShow
+      }
+
+      if (this.$store.state.people.list.length === 0) {
+        return false
+      }
+
+      if (itemsToShow === this.$store.state.people.list.length) {
+        return false
+      } else if (itemsToShow + itemsToAdd >= this.$store.state.people.list.length) {
+        itemsToShow = this.$store.state.people.list.length
+      } else {
+        itemsToShow += itemsToAdd
+      }
+
+      if (page === 'people') {
+        this.peopleToShow = itemsToShow
+      } else if (page === 'startups') {
+        this.startupsToShow = itemsToShow
+      }
+
+      return true
     }
   }
 }

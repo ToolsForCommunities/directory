@@ -32,7 +32,7 @@
       <v-card-text>
         <div class="subtitle-1 text-truncate">
           <span>
-            Tetuan Valley
+            {{ program || location }}
           </span>
         </div>
       </v-card-text>
@@ -59,6 +59,11 @@ export default {
       required: false
     },
     location: {
+      type: String,
+      default: '',
+      required: false
+    },
+    program: {
       type: String,
       default: '',
       required: false
