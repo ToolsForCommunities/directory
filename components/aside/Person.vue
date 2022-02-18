@@ -6,11 +6,10 @@
       <v-img
         aspect-ratio="1"
         :src="person.pic || '/img/nopic.vue'"
-        class="rounded"
       />
       <!-- /Picture -->
       <!-- Info -->
-      <div>
+      <div class="px-4 px-md-0">
         <!-- Name -->
         <v-card-title
           class="pb-0 pt-2 pa-0 ma-0 text-center d-block"
