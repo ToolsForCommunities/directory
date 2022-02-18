@@ -48,7 +48,7 @@
 
     <v-divider />
 
-    <div class="pa-4 lateral-scrollable">
+    <div class="pa-md-4 pa-0 lateral-scrollable">
       <slot />
     </div>
   </div>
