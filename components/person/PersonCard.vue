@@ -1,5 +1,5 @@
 <template>
-  <v-hover>
+  <v-hover class="elevation-0">
     <template #default="{ hover }">
       <v-card
         :elevation="hover ? 12 : 0"
