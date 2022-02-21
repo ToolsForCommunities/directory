@@ -41,7 +41,7 @@
       <!-- /Alert -->
       <!-- Cards -->
       <v-card
-        class="pa-4"
+        class="pa-4 pb-2 mb-0"
         flat
       >
         <div class="flex-sm-column-reverse flex-lg-row flex-no-wrap justify-space-between">
@@ -59,13 +59,17 @@
 
             <PersonCardList :people="newcommers" />
 
-            <!-- <v-card-actions>
-              <CTButton
-                text
-              >
-                Learn more
-              </CTButton>
-            </v-card-actions> -->
+            <v-card-actions class="d-flex justify-center">
+              <nuxt-link to="people">
+                <CTButton
+                  text
+                  to="people"
+                  nuxt
+                >
+                  See all
+                </CTButton>
+              </nuxt-link>
+            </v-card-actions>
           </div>
         </div>
       </v-card>
@@ -85,7 +89,7 @@
               Waze founder visiting the space
             </v-card-title>
             <v-card-subtitle class="px-0">
-              Tomorrow at 13:30 Johanna Cohen will visit our Cafe space for a quick fireside chat with the community
+              Tomorrow at 13:30 Uri Levine will visit our Cafe space for a quick fireside chat with the community
             </v-card-subtitle>
 
             <!-- <v-card-actions>
@@ -120,10 +124,10 @@
               News
             </div>
             <v-card-title class="px-0 pt-0">
-              Vostok 6 es adquirido por La Ser Podcasts
+              SER acquires Vostok 6 podcast
             </v-card-title>
             <v-card-subtitle class="px-0">
-              Tomorrow at 13:30 Johanna Cohen will visit our Cafe space for a quick fireside chat with the community
+              The podcast that was created in this space is now on the national radio. Congrats team!
             </v-card-subtitle>
           </div>
 
