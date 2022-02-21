@@ -6,7 +6,6 @@
       <v-img
         aspect-ratio="1"
         :src="startup.logo || '/img/nologo.png'"
-        class="rounded"
       />
       <!-- /Picture -->
       <!-- Info -->
@@ -14,7 +13,7 @@
         <!-- Name -->
         <v-card-title
           class="pb-0 pt-2 pa-0 ma-0 text-center d-block text-truncate"
-          title="Sheetgo"
+          :title="startup.name"
         >
           {{ startup.name }}
         </v-card-title>
@@ -27,8 +26,8 @@
             target="_blank"
           >
             <CTButton
-              text
-              class="my-4"
+              outline
+              class="my-2"
             >
               <span>{{ startup.website }}</span>
               <v-icon right>
@@ -51,13 +50,14 @@
           <!-- /Bio -->
 
           <!-- Chips -->
-          <div>
+          <div class="mt-4">
             <!-- Location -->
             <v-chip
               filter
               outlined
+              class="my-1 mr-2"
             >
-              <v-icon left color="#757575">
+              <v-icon small left color="#757575">
                 mdi-map-marker
               </v-icon>
               {{ startup.location }}
@@ -68,8 +68,9 @@
               v-for="program in startup.program.split(',')"
               :key="program"
               outlined
+              class="my-1 mr-2"
             >
-              <v-icon left color="#757575">
+              <v-icon small left color="#757575">
                 mdi-account-group
               </v-icon>
               {{ program }}
