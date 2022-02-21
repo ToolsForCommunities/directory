@@ -5,7 +5,7 @@
       :key="tag.id"
       filter
       outlined
-      class="mx-1"
+      class="ma-1"
     >
       {{ tag.name }}
     </v-chip>
