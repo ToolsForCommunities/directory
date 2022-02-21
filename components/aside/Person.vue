@@ -118,7 +118,7 @@
           <span class="subtitle-1">Needs help with</span>
           <TagList :tags="interests" />
 
-          <div class="pt-2">
+          <!-- <div class="pt-2">
             <CTButton
               primary
               text
@@ -131,7 +131,7 @@
             >
               Help {{ person.name }}
             </CTButton>
-          </div>
+          </div> -->
         </div>
         <!-- /Interests -->
 
