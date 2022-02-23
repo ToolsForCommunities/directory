@@ -22,6 +22,7 @@
         </v-tab>
       </v-tabs>
     </NavigationSearchTopbar>
+
     <v-container>
       <v-tabs-items v-model="tab">
         <!-- All tab -->
@@ -53,6 +54,7 @@
 export default {
   data: () => ({
     tab: null,
+    searchText: '',
     peopleToShow: 12,
     startupsToShow: 12
   }),
@@ -64,8 +66,7 @@ export default {
   },
   computed: {
     people () {
-      // const list = this.$store.state.people.list
-      const list = this.$store.getters['people/selected']
+      const list = this.$store.getters['people/search'](this.searchText)
 
       if (this.peopleToShow >= list.length) {
         return list
@@ -74,16 +75,18 @@ export default {
       return list.slice(0, this.peopleToShow)
     },
     startups () {
-      if (this.startupsToShow >= this.$store.state.startup.list.length) {
-        return this.$store.state.startup.list
+      const list = this.$store.getters['startup/search'](this.searchText)
+
+      if (this.peopleToShow >= list.length) {
+        return list
       }
 
-      return this.$store.state.startup.list.slice(0, this.startupsToShow)
+      return list.slice(0, this.peopleToShow)
     }
   },
   methods: {
     search (text) {
-      console.log(text)
+      this.searchText = text
     },
     infiniteScrolling (page) {
       const itemsToAdd = 9
