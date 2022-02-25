@@ -23,10 +23,12 @@
           v-if="startup"
           class="pa-0 ma-0 text-center"
         >
-          <div class="subtitle-1">
+          <div class="subtitle-1 d-flex flex-column">
             <span>
-              {{ startup.role }} <span>at</span>
-              <nuxt-link to="?aside=startup/1">
+              {{ startup.role }}
+            </span>
+            <span>
+              <nuxt-link :to="'?aside=startup/'+startup.id">
                 {{ startup.name }}
               </nuxt-link>
             </span>
