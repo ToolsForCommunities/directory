@@ -93,12 +93,14 @@
             </v-card-subtitle>
 
             <v-card-actions class="ma-0 pa-0">
-              <CTButton
+              <v-btn
                 text
+                plain
                 class="pa-0"
+                color="primary"
               >
                 Read more
-              </CTButton>
+              </v-btn>
             </v-card-actions>
           </div>
 
@@ -189,6 +191,24 @@ export default {
   .ct-container__has-topbar {
     padding-top: 64px;
   }
+
+/* Add plain to CTButton */
+
+>>> .v-btn--plain .v-btn__content {
+  text-transform: none;
+}
+
+>>> .v-btn--plain:not(.v-btn--active):not(.v-btn--loading):not(:focus):not(:hover) .v-btn__content {
+  opacity: 1 ;
+  text-transform: none;
+}
+
+>>> .v-btn--plain .v-btn__content:hover {
+  opacity: .64;
+  text-transform: none;
+}
+
+/* / */
 
 @media screen  and (max-width: 959px) {
   .v-avatar {
