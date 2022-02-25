@@ -92,13 +92,14 @@
               Tomorrow at 13:30 Uri Levine will visit our Cafe space for a quick fireside chat with the community
             </v-card-subtitle>
 
-            <!-- <v-card-actions>
+            <v-card-actions class="ma-0 pa-0">
               <CTButton
                 text
+                class="pa-0"
               >
-                Learn more
+                Read more
               </CTButton>
-            </v-card-actions> -->
+            </v-card-actions>
           </div>
 
           <v-avatar
