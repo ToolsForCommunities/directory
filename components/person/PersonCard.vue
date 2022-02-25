@@ -6,7 +6,8 @@
         :loading="loading"
         :to="`?aside=person/${id}`"
         nuxt
-        class="mx-auto my-1 "
+        class="mx-auto my-1 mb-0"
+        style="height: 100%;"
         flat
         outlined
       >
