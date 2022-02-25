@@ -16,7 +16,6 @@
       >
         <v-btn
           icon
-          class="d-lg-none d-xl-flex"
           @click="$store.dispatch('aside/clear')"
         >
           <v-icon>mdi-arrow-left</v-icon>
