@@ -12,7 +12,10 @@
         text
       >
         <!-- <v-icon left>
-          mdi-plus-circle
+          mdi-account-plus
+        </v-icon> -->
+        <!-- <v-icon left>
+          mdi-plus-circle-outline
         </v-icon> -->
         Add new
       </CTButton>
