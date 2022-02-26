@@ -8,6 +8,7 @@
         :src="person.pic || '/img/nopic.vue'"
       />
       <!-- /Picture -->
+
       <!-- Info -->
       <div class="px-4 px-md-0">
         <!-- Name -->
@@ -37,20 +38,7 @@
         <!-- /Job description -->
 
         <!-- Connect CTA -->
-        <div class="text-center">
-          <CTButton
-            primary
-            class="my-4"
-          >
-            Slack
-          </CTButton>
-          <CTButton
-            primary
-            class="my-4"
-          >
-            Mail
-          </CTButton>
-        </div>
+        <PersonConnect :item="person" />
         <!-- /Connect CTA -->
 
         <!-- About -->
@@ -71,32 +59,37 @@
             multiple
             class="pt-2"
           >
+            <!-- Location -->
             <v-chip
-              v-if="person.location"
-              filter
+              v-if="$settings.hasLocation && person.location"
               outlined
             >
-              <v-icon left color="#757575">
+              <v-icon small left color="#757575">
                 mdi-map-marker
               </v-icon>
               {{ person.location }}
             </v-chip>
+
+            <!-- Program -->
+            <span v-if="$settings.hasProgram && person.program">
+              <v-chip
+                v-for="program in person.program.split(',')"
+                :key="program"
+                outlined
+              >
+                <v-icon small left color="#757575">
+                  mdi-account-group
+                </v-icon>
+                {{ program }}
+              </v-chip>
+            </span>
+
+            <!-- ToDo: Membership -->
             <v-chip
-              v-if="person.program"
-              filter
+              v-if="$settings.hasMembership && person.joinedAt"
               outlined
             >
-              <v-icon left color="#757575">
-                mdi-account-group
-              </v-icon>
-              {{ person.program }}
-            </v-chip>
-            <v-chip
-              v-if="person.joinedAt"
-              filter
-              outlined
-            >
-              <v-icon left color="#757575">
+              <v-icon small left color="#757575">
                 mdi-calendar
               </v-icon>
               Member since {{ person.joinedAt }}
@@ -110,14 +103,18 @@
 
         <!-- Skills -->
         <div v-if="skills.length > 0" class="py-4">
-          <span class="subtitle-1">Knowledge areas</span>
+          <span class="subtitle-1">
+            {{ $settings.skillsProfileText || 'Knowledge areas' }}
+          </span>
           <TagList :tags="skills" />
         </div>
         <!-- /Skills -->
 
         <!-- Interests -->
         <div v-if="interests.length > 0" class="pb-4">
-          <span class="subtitle-1">Needs help with</span>
+          <span class="subtitle-1">
+            {{ $settings.interestsProfileText || 'Needs help with' }}
+          </span>
           <TagList :tags="interests" />
 
           <!-- <div class="pt-2">
@@ -136,6 +133,21 @@
           </div> -->
         </div>
         <!-- /Interests -->
+
+        <!-- Custom Tags -->
+        <div v-if="personTagCategories && personTagCategories.length > 0">
+          <div
+            v-for="(category, i) in personTagCategories"
+            :key="i"
+            class="pb-4"
+          >
+            <span class="subtitle-1">
+              {{ category }}
+            </span>
+            <TagList :tags="categoryTags(category)" />
+          </div>
+        </div>
+        <!-- /Custom Tags -->
 
         <v-divider />
 
@@ -181,6 +193,15 @@ export default {
       }
 
       return this.person.Tag.filter(tag => tag.relations.includes('HAS_INTEREST'))
+    },
+    personTagCategories () {
+      // ToDo: Filter the categories so it only appear if user has tags
+      return (this.$settings.personTagCategories && this.$settings.personTagCategories.split(',')) || null
+    }
+  },
+  methods: {
+    categoryTags (category) {
+      return this.person.Tag.filter(tag => tag.category && tag.category === category) || []
     }
   }
 }

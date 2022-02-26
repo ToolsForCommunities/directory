@@ -42,7 +42,7 @@ export default {
       {
         name: 'More',
         icon: 'mdi-dots-horizontal-circle',
-        route: '/inspire'
+        route: '/more'
       }
     ]
   }),

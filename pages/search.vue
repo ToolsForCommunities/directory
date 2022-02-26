@@ -61,7 +61,7 @@ export default {
   fetch () {
     return Promise.all([
       this.$store.dispatch('people/list'),
-      this.$store.dispatch('startup/list')
+      this.$store.dispatch('startups/list')
     ])
   },
   computed: {
@@ -75,7 +75,7 @@ export default {
       return list.slice(0, this.peopleToShow)
     },
     startups () {
-      const list = this.$store.getters['startup/search'](this.searchText)
+      const list = this.$store.getters['startups/search'](this.searchText)
 
       if (this.peopleToShow >= list.length) {
         return list

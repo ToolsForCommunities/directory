@@ -53,7 +53,7 @@
           <div class="mt-4">
             <!-- Location -->
             <v-chip
-              filter
+              v-if="$settings.hasLocation && startup.location"
               outlined
               class="my-1 mr-2"
             >
@@ -64,20 +64,23 @@
             </v-chip>
 
             <!-- Programs -->
-            <v-chip
-              v-for="program in startup.program.split(',')"
-              :key="program"
-              outlined
-              class="my-1 mr-2"
-            >
-              <v-icon small left color="#757575">
-                mdi-account-group
-              </v-icon>
-              {{ program }}
-            </v-chip>
+            <!-- Program -->
+            <span v-if="$settings.hasProgram && startup.program">
+              <v-chip
+                v-for="program in startup.program.split(',')"
+                :key="program"
+                outlined
+              >
+                <v-icon small left color="#757575">
+                  mdi-account-group
+                </v-icon>
+                {{ program }}
+              </v-chip>
+            </span>
 
             <!-- Member since -->
             <!-- <v-chip
+              v-if="$settings.hasMembership && startup.joinedAt"
               filter
               outlined
             >
@@ -94,108 +97,33 @@
         <v-divider />
 
         <!-- Tags -->
-        <div class="py-4">
-          <span class="subtitle-1">Verticals</span>
-          <v-chip-group
-            column
-            multiple
-          >
-            <v-chip
-              filter
-              outlined
-            >
-              Advertising
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Automotive
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Blockchain
-            </v-chip>
-          </v-chip-group>
-          <!-- <CTButton
-            primary
-            text
-            class="mt-2"
-          >
-            Ask for help
-          </CTButton> -->
+        <div v-if="tags && tags.length > 0" class="py-4">
+          <span class="subtitle-1">Tags</span>
+          <TagList :tags="tags" />
         </div>
         <!-- /Tags -->
 
-        <!-- Skills -->
-        <div v-if="startup.Tag && startup.Tag.length > 0" class="py-4">
-          <span class="subtitle-1">Knowledge areas</span>
-          <TagList :tags="startup.Tag" />
+        <!-- Custom Tags -->
+        <div v-if="tags && tags.length > 0">
+          <div
+            v-for="tagsCategory in tagCategories"
+            :key="tagsCategory.name"
+            class="py-4"
+          >
+            <span class="subtitle-1">
+              {{ tagsCategory.name }}
+            </span>
+            <TagList :tags="tagsCategory.tags" />
+          </div>
         </div>
-        <!-- /Skills -->
+        <!-- /Custom Tags -->
 
         <v-divider />
 
         <!-- Team -->
         <div class="py-4">
           <span class="subtitle-1">Team</span>
-          <v-list>
-            <!-- Component starts here -->
-            <!--
-             <v-list-item
-              v-for="person in startup.Person"
-              :key="person.id"
-            >
-              <v-list-item-avatar>
-                <v-img src="person.pic"></v-img>
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <v-list-item-title>
-                  {{ person.name }}
-                </v-list-item-title>
-                <v-list-item-subtitle>
-                  {{ person.role }}
-                </v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item> -->
-
-            <!-- Component starts here -->
-            <v-list-item>
-              <v-list-item-avatar>
-                <v-img src="https://codingcarlos.com/wp-content/uploads/2017/07/epic-yo-600x600.jpg"></v-img>
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <v-list-item-title>Carlos Hernández</v-list-item-title>
-                <v-list-item-subtitle>Lead Barbudo</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-            <!-- Component ends here -->
-            <v-list-item>
-              <v-list-item-avatar>
-                <v-img src="https://codingcarlos.com/wp-content/uploads/2017/07/epic-yo-600x600.jpg"></v-img>
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <v-list-item-title>Ivo Vilches</v-list-item-title>
-                <v-list-item-subtitle>Lead Gafotas</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item>
-              <v-list-item-avatar>
-                <v-img src="https://codingcarlos.com/wp-content/uploads/2017/07/epic-yo-600x600.jpg"></v-img>
-              </v-list-item-avatar>
-
-              <v-list-item-content>
-                <v-list-item-title>Olga Salas</v-list-item-title>
-                <v-list-item-subtitle>Lead Culona</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-          <CTButton text>View 3 more</CTButton>
+          <PersonList :people="startup.persons" />
         </div>
         <!-- /Team -->
 
@@ -217,18 +145,14 @@ export default {
   computed: {
     startup () {
       const id = this.$store.state.aside.id
-      return this.$store.getters['startup/getById'](id) || {}
-    },
-    // REVIEW THIS: Is this part of store?
-    config () {
-      return {}
+      return this.$store.getters['startups/getById'](id) || {}
     },
     tagCategories () {
-      if (!this.config.startupTagCategories || this.config.startupTagCategories.length === 0) {
+      if (!this.$settings.startupTagCategories || this.$settings.startupTagCategories.length === 0) {
         return []
       }
 
-      const categories = this.config.startupTagCategories.split(',')
+      const categories = this.$settings.startupTagCategories.split(',')
 
       return categories.map(categoryName => ({
         name: categoryName,

@@ -5,11 +5,11 @@
       :title="$t('startups.title')"
     />
     <v-container>
-      <FilterList for="startup" />
+      <FilterList for="startups" />
 
       <!-- Startup Cards Skeletons -->
       <v-row
-        v-if="$store.state.startup.list.length === 0"
+        v-if="startups.length === 0"
         dense
       >
         <v-col
@@ -24,6 +24,7 @@
           />
         </v-col>
       </v-row>
+
       <!-- Startup Cards -->
       <v-row
         v-else
@@ -55,7 +56,7 @@ export default {
   fetch () {
     return Promise.all([
       this.$store.dispatch('tag/list'),
-      this.$store.dispatch('startup/list')
+      this.$store.dispatch('startups/list')
     ])
   },
   head: {
@@ -73,25 +74,34 @@ export default {
       return this.$store.state.tag.list || []
     },
     startups () {
-      if (this.itemsToShow >= this.$store.state.startup.list.length) {
-        return this.$store.state.startup.list
+      const list = this.$store.getters['startups/selected']
+
+      if (this.itemsToShow >= list.length) {
+        return list
       }
 
-      return this.$store.state.startup.list.slice(0, this.itemsToShow)
+      return list.slice(0, this.itemsToShow)
     }
+    // startups () {
+    //   if (this.itemsToShow >= this.$store.state.startups.list.length) {
+    //     return this.$store.state.startups.list
+    //   }
+
+    //   return this.$store.state.startups.list.slice(0, this.itemsToShow)
+    // }
   },
   methods: {
     infiniteScrolling () {
       const itemsToAdd = 9
 
-      if (this.$store.state.startup.list.length === 0) {
+      if (this.$store.state.startups.list.length === 0) {
         return false
       }
 
-      if (this.itemsToShow === this.$store.state.startup.list.length) {
+      if (this.itemsToShow === this.$store.state.startups.list.length) {
         return false
-      } else if (this.itemsToShow + itemsToAdd >= this.$store.state.startup.list.length) {
-        this.itemsToShow = this.$store.state.startup.list.length
+      } else if (this.itemsToShow + itemsToAdd >= this.$store.state.startups.list.length) {
+        this.itemsToShow = this.$store.state.startups.list.length
       } else {
         this.itemsToShow += itemsToAdd
       }

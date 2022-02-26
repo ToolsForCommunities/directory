@@ -20,7 +20,7 @@
       :cover="false"
       :src="logo || '/img/nologo.png'"
     />
-    <v-divider/>
+    <v-divider />
     <div>
       <v-card-title
         class="pt-2 pb-0 px-4 text-truncate d-block"

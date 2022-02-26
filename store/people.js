@@ -67,7 +67,10 @@ export const actions = {
 
 export const mutations = {
   SET_LIST (state, list) {
-    state.list = list
+    state.list = [
+      ...list.filter(item => (item.pic && item.pic !== 'undefined')),
+      ...list.filter(item => (!item.pic || item.pic === '' || item.pic === 'undefined'))
+    ]
   },
   SET_FILTERS (state, filters) {
     state.filters = filters

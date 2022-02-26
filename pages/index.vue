@@ -76,76 +76,14 @@
 
       <v-divider />
 
-      <v-card
-        class="pa-4 mb-0"
-        flat
+      <!-- Cards -->
+      <div
+        v-for="item in news"
+        :key="item.id"
       >
-        <div class="d-flex flex-column-reverse flex-md-row flex-no-wrap justify-space-between">
-          <div>
-            <div class="text-overline">
-              News
-            </div>
-            <v-card-title class="px-0 pt-0">
-              Waze founder visiting the space
-            </v-card-title>
-            <v-card-subtitle class="px-0">
-              Tomorrow at 13:30 Uri Levine will visit our Cafe space for a quick fireside chat with the community
-            </v-card-subtitle>
-
-            <v-card-actions class="ma-0 pa-0">
-              <v-btn
-                text
-                plain
-                class="pa-0"
-                color="primary"
-              >
-                Read more
-              </v-btn>
-            </v-card-actions>
-          </div>
-
-          <v-avatar
-            tile
-            size="124"
-            color="grey"
-            class="d-sm-flex ml-md-4 mb-2 mb-md-0"
-          >
-            <v-img src="https://jewishbusinessnews.com/wp-content/uploads/2013/06/uri-levine.jpg" />
-          </v-avatar>
-        </div>
-      </v-card>
-
-      <v-divider />
-
-      <v-card
-        class="pa-4 mb-0"
-        flat
-      >
-        <div class="d-flex flex-column-reverse flex-md-row flex-no-wrap justify-space-between">
-          <div>
-            <div class="text-overline">
-              News
-            </div>
-            <v-card-title class="px-0 pt-0">
-              SER acquires Vostok 6 podcast
-            </v-card-title>
-            <v-card-subtitle class="px-0">
-              The podcast that was created in this space is now on the national radio. Congrats team!
-            </v-card-subtitle>
-          </div>
-
-          <v-avatar
-            tile
-            size="124"
-            color="grey"
-            class="d-sm-flex ml-md-4 mb-2 mb-md-0"
-          >
-            <v-img src="http://static-1.ivoox.com/canales/5/5/3/3/5533eafd2ae231698df95a8c79764cd8_XXL.jpg" />
-          </v-avatar>
-        </div>
-      </v-card>
-
-      <v-divider />
+        <NewsCard v-bind="news" />
+        <v-divider />
+      </div>
       <!-- /Cards -->
 
       <!-- After -->
@@ -161,6 +99,9 @@
 
 <script>
 export default {
+  fetch () {
+    this.$store.dispatch('news/list')
+  },
   head: {
     title: 'Home',
     meta: [
@@ -174,6 +115,9 @@ export default {
   computed: {
     newcommers () {
       return this.$store.state.people.list.slice(10, 13)
+    },
+    news () {
+      return this.$store.state.news.list || []
     }
   }
 }

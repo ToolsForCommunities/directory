@@ -1,15 +1,19 @@
 <template>
   <div v-if="active.length > 0">
-    <span class="subtitle-1">Social</span>
-
-    <v-list>
-      <SocialProfileItem
-        v-for="platform in active"
+    <div class="text-center">
+      <a
+        v-for="platform in platformList"
         :key="platform.field"
-        :link="item[platform.field]"
-        :platform="platform"
-      />
-    </v-list>
+        :href="item[platform.field]"
+        target="_blank"
+      >
+        <CTButton primary class="my-4 mx-1">
+          {{ platform.name }}
+        </CTButton>
+      </a>
+
+      <!-- ToDo: Dropdown with all the other options -->
+    </div>
   </div>
 </template>
 
@@ -63,6 +67,23 @@ export default {
   computed: {
     active () {
       return this.platforms.filter(platform => !!this.item[platform.field])
+    },
+    platformList () {
+      if (this.active.length <= 3) {
+        return this.active
+      }
+
+      return [
+        this.active[0],
+        this.active[1]
+      ]
+    },
+    dropdown () {
+      if (this.active.length <= 3) {
+        return null
+      }
+
+      return this.active.slice(2)
     }
   }
 }

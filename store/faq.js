@@ -9,7 +9,7 @@ export const state = () => ({
 
 export const actions = {
   list ({ commit }) {
-    return axios.get(`${api.url}/tag`)
+    return axios.get(`${api.url}/faq`)
       .then(response => response.data)
       .then((list) => {
         commit('SET_LIST', list)
@@ -21,8 +21,6 @@ export const actions = {
 
 export const mutations = {
   SET_LIST (state, list) {
-    state.list = list.filter(tag => tag.name).sort((a, b) => {
-      return a.name.trim().localeCompare(b.name.trim())
-    })
+    state.list = list
   }
 }
