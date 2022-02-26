@@ -9,7 +9,7 @@
       </v-toolbar-title>
     </v-toolbar> -->
 
-    <v-card outlined class="ma-4">
+    <v-card outlined class="ma-0 ma-md-4">
       <v-toolbar
         flat
         dense
@@ -246,3 +246,12 @@
     </v-card>
   </div>
 </template>
+
+<style scoped>
+
+@media screen and (max-width: 959px) {
+  .v-card {
+    border: none;
+  }
+}
+</style>
