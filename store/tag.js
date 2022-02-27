@@ -7,6 +7,18 @@ export const state = () => ({
   list: []
 })
 
+export const getters = {
+  getByTarget: state => (target) => {
+    const list = state.list
+
+    if (!target || target.toLowerCase() === 'all') {
+      return list
+    }
+
+    return list.filter(item => item.for.includes(target)) || []
+  }
+}
+
 export const actions = {
   list ({ commit }) {
     return axios.get(`${api.url}/tag`)

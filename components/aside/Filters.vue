@@ -1,15 +1,7 @@
 <template>
   <div>
-    <!-- <v-toolbar
-      flat
-      color="white"
-    >
-      <v-toolbar-title class="px-4 font-weight-bold fill-width">
-        Assistant
-      </v-toolbar-title>
-    </v-toolbar> -->
-
     <v-card outlined class="ma-0 ma-md-4">
+      <!-- Toolbar -->
       <v-toolbar
         flat
         dense
@@ -21,7 +13,9 @@
           <v-icon>mdi-arrow-left</v-icon>
         </v-btn>
         <v-toolbar-title>Filters</v-toolbar-title>
+
         <v-spacer />
+
         <CTButton
           text
         >
@@ -29,223 +23,172 @@
         </CTButton>
       </v-toolbar>
       <v-divider />
-      <v-card elevation="0 px-4">
-        <v-card-text>
-          <h2 class="text-h6 mb-2">
-            Program filters
-          </h2>
+      <!-- /Toolbar -->
 
-          <v-chip-group
-            v-model="amenities"
-            column
-            multiple
-          >
-            <v-chip
-              filter
-              outlined
-            >
-              Elevator
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Washer / Dryer
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Fireplace
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Wheelchair access
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Dogs ok
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Cats ok
-            </v-chip>
-          </v-chip-group>
-        </v-card-text>
+      <div class="mx-4">
+        <!-- Programs -->
+        <FilterModule
+          v-if="hasProgram"
+          :tags="programs"
+          title="Programs"
+        />
+        <!-- /Programs -->
+
         <v-divider />
-        <v-card-text>
-          <h2 class="text-h6 mb-2">
-            All filters
-          </h2>
 
-          <v-chip-group
-            v-model="neighborhoods"
-            column
-            multiple
+        <!-- Locations -->
+        <FilterModule
+          :tags="locations"
+          title="Locations"
+        />
+        <!-- /Locations -->
+
+        <v-divider />
+
+        <!-- Tag Categories -->
+        <div v-if="tagCategories.length > 0">
+          <div
+            v-for="tagsCategory in tagCategories"
+            :key="tagsCategory.name"
           >
-            <v-chip
-              filter
-              outlined
-            >
-              Snowy Rock Place
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Honeylane Circle
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Donna Drive
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Elaine Street
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Court Street
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Kennedy Park
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Snowy Rock Place
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Honeylane Circle
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Donna Drive
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Elaine Street
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Court Street
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Kennedy Park
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Snowy Rock Place
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Honeylane Circle
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Donna Drive
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Elaine Street
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Court Street
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Kennedy Park
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Snowy Rock Place
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Honeylane Circle
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Donna Drive
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Elaine Street
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Court Street
-            </v-chip>
-            <v-chip
-              filter
-              outlined
-            >
-              Kennedy Park
-            </v-chip>
-          </v-chip-group>
-        </v-card-text>
+            <FilterModule
+              :tags="tagsCategory.tags"
+              :title="tagsCategory.name"
+            />
+          </div>
+        </div>
+        <!-- /Tag Categories -->
 
-        <!-- <CTButton
-          primary
-          block
-        >
-          Apply
-        </CTButton> -->
-      </v-card>
+        <v-divider />
+
+        <!-- All filters -->
+        <FilterModule
+          :tags="$store.state.tag.list"
+          title="Todos los filtros"
+        />
+        <!-- /All filters -->
+      </div>
     </v-card>
   </div>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    activePrograms: [],
+    locationFilter: [],
+    tagFilter: []
+  }),
+  computed: {
+    page () {
+      const name = this.$route.name
+
+      if (name.toLowerCase().includes('people')) {
+        return 'people'
+      }
+
+      if (name.toLowerCase().includes('startup')) {
+        return 'startups'
+      }
+
+      return 'all'
+    },
+    tags () {
+      return this.$store.getters['tag/getByTarget'](this.for)
+    },
+    hasProgram () {
+      return this.$settings.hasProgram && this.$settings.programOptions
+    },
+    programs () {
+      const programs = this.$settings.programOptions
+      if (programs) {
+        return programs.split(',').map((item) => {
+          return {
+            id: item,
+            name: item,
+            active: this.activePrograms.includes(item) > -1
+          }
+        })
+      }
+
+      return []
+    },
+    locations () {
+      const locations = this.$store.state.people.list
+        .flatMap((item) => {
+          const location = (item && item.location) || ''
+
+          if (location.includes('/') > -1) {
+            return location.split('/')
+          } else if (location.includes(';') > -1) {
+            return location.split(';')
+          }
+
+          return [location]
+        })
+        .filter(item => !!item)
+        .sort()
+
+      // Remove duplicates
+      return Array.from(new Set(locations).map(item => ({ name: item, id: item })))
+    },
+    // ToDo: Refactor this three computed props to avoid code duplication
+    startupTagCategories () {
+      if (!this.$settings.startupTagCategories || this.$settings.startupTagCategories.length === 0) {
+        return []
+      }
+
+      const categories = this.$settings.startupTagCategories.split(',')
+      return this.makeTagCategories(categories)
+    },
+    personTagCategories () {
+      if (!this.$settings.personTagCategories || this.$settings.personTagCategories.length === 0) {
+        return []
+      }
+
+      const categories = this.$settings.personTagCategories.split(',')
+      return this.makeTagCategories(categories)
+    },
+    tagCategories () {
+      // let categories = ''
+      if (this.page === 'startups') {
+        return this.startupTagCategories
+      } else if (this.page === 'people') {
+        return this.personTagCategories
+      } else {
+        return []
+      }
+    }
+  },
+  methods: {
+    makeTagCategories (categories) {
+      return categories.map(categoryName => ({
+        name: categoryName,
+        tags: this.tagsByCategory(categoryName)
+      })).filter(category => category.tags.length > 0)
+    },
+    tagsByCategory (category, onlyUncategorized) {
+      // Has no tags
+      if (!this.tags) {
+        return []
+      }
+
+      if (onlyUncategorized) {
+        return this.tags.filter(tag => !tag.category)
+      }
+
+      // No category defined, return all tags
+      if (!category) {
+        return this.tags
+      }
+
+      return this.tags.filter((tag) => {
+        return tag.category && tag.category.toUpperCase() === category.toUpperCase()
+      })
+    }
+  }
+}
+</script>
 
 <style scoped>
 

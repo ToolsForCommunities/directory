@@ -52,13 +52,7 @@ export default {
   },
   computed: {
     tags () {
-      const list = this.$store.state.tag.list
-
-      if (this.for.toLowerCase() === 'all') {
-        return list
-      }
-
-      return list.filter(item => item.for.includes(this.for)) || []
+      return this.$store.getters['tag/getByTarget'](this.for)
     }
   },
   methods: {
