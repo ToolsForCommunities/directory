@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- Person Cards Skeletons (loading...) -->
+    <!-- Startup Cards Skeletons (loading...) -->
     <v-row
-      v-if="startups.length === 0 && $store.state.startup.list.loading"
+      v-if="startups.length === 0 && $store.state.startups.list.loading"
       dense
     >
       <v-col
@@ -22,7 +22,7 @@
       No one found
     </div>
 
-    <!-- Person Cards -->
+    <!-- Startup Cards -->
     <v-row
       v-else
       dense

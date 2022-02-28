@@ -1,9 +1,6 @@
 function filterByPrograms (list, programs) {
   let filtered = list
 
-  console.log(list)
-  console.log(programs)
-
   if (Array.isArray(programs) && programs.length !== 0) {
     // Filter by programs
     filtered = filtered.filter((person) => {

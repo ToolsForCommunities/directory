@@ -7,40 +7,7 @@
     <v-container>
       <FilterList for="startups" />
 
-      <!-- Startup Cards Skeletons -->
-      <v-row
-        v-if="startups.length === 0"
-        dense
-      >
-        <v-col
-          v-for="i in 6"
-          :key="i"
-          cols="6"
-          lg="4"
-        >
-          <v-skeleton-loader
-            v-bind="attrs"
-            type="image, article"
-          />
-        </v-col>
-      </v-row>
-
-      <!-- Startup Cards -->
-      <v-row
-        v-else
-        dense
-      >
-        <v-col
-          v-for="group in startups"
-          :key="group.id"
-          cols="6"
-          lg="4"
-        >
-          <StartupCard
-            v-bind="group"
-          />
-        </v-col>
-      </v-row>
+      <StartupCardList :startups="startups" />
 
       <!-- Infinite scroll dispatcher -->
       <div v-intersect="infiniteScrolling" class="py-4" />

@@ -6,6 +6,7 @@
     class="mx-auto my-1"
     flat
     outlined
+    @click="track"
   >
     <template slot="progress">
       <v-progress-linear
@@ -41,6 +42,8 @@
 </template>
 
 <script>
+import getViewCategory from '@/assets/js/helpers/getViewCategory'
+
 export default {
   props: {
     id: {
@@ -84,6 +87,17 @@ export default {
     },
     startup () {
       return (this.Group && this.Group[0]) || null
+    }
+  },
+  methods: {
+    track () {
+      const category = getViewCategory(this.$route.name.split('__')[0])
+
+      this.$store.dispatch('track/event', {
+        category,
+        action: 'view_startup',
+        label: this.id
+      })
     }
   }
 }

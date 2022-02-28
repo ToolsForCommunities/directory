@@ -29,7 +29,7 @@
         small
         text
         class="btn-labeled py-7 px-2 ml-3"
-        @click="$store.dispatch('aside/set', 'filters')"
+        @click="openFilters"
       >
         <div>
           <v-icon>mdi-tune</v-icon>
@@ -60,78 +60,34 @@
 // import ProfileIconDropdown from '@/components/ProfileIconDropdown.vue'
 
 function searchOpen () {
-  this.searching = true
-  // this.$ga.event('search', 'search_open')
-}
-
-function searchClose () {
-  this.searching = false
-  // this.$ga.event('search', 'search_back')
+  this.$store.dispatch('track/event', {
+    category: 'search',
+    action: 'search_open'
+  })
 }
 
 function searchClear () {
-  // this.$ga.event('search', 'search_clear')
+  this.$store.dispatch('track/event', {
+    category: 'search',
+    action: 'search_clear'
+  })
 }
 
 function trackSearch (search) {
-  // this.$ga.event('search', 'search_type', search)
+  this.$store.dispatch('track/event', {
+    category: 'search',
+    action: 'search_type',
+    label: search
+  })
 }
 
 export default {
-  name: 'Tabs',
-  // components: {
-  //   SiteLogo,
-  //   ProfileIconDropdown
-  // },
-  props: {
-    title: {
-      type: String,
-      default: 'Directory'
-    }
-  },
   data: () => ({
-    searching: false,
-    tabs: 'tabs-home',
-    search: '',
-    tagFilter: [],
-    allFilters: false,
-    dialog: false,
-    tabClicked: null
+    search: ''
   }),
   computed: {
-    config () {
-      return this.$settings
-    },
-    tagTab () {
-      return this.$route.name
-    },
-    tagList () {
-      const tags = this.$store.getters['tags/getByTarget'](this.tagTab) || []
-      return tags
-    },
-    hasFilters () {
-      const hasFilters = this.tagList.length > 0
-      return hasFilters
-    },
-    hasSearch () {
-      const searchTabs = ['people', 'startups']
-      const tab = this.tagTab || ''
-      const hasSearch = (searchTabs.includes(tab))
-      return hasSearch
-    },
-    tagTabFilter () {
-      const tags = this.tagList.map(item => item.name)
-      return this.tagFilter.filter(item => tags.includes(item))
-    },
-    // title () {
-    //   return this.config.title || 'Directory'
-    // },
-    logo () {
-      return this.config.logo || '/img/logo.png'
-    },
     searchPlaceholder () {
-      return 'Try RatedPower, Andrea or UX'
-      // return this.config.searchPlaceholder || 'Try RatedPower, Andrea or UX'
+      return this.$settings.searchPlaceholder || 'Try RatedPower, Andrea or UX'
     }
   },
   watch: {
@@ -141,18 +97,15 @@ export default {
   },
   methods: {
     searchOpen,
-    searchClose,
     searchClear,
     trackSearch,
-    switchTag (name) {
-      const index = this.tagFilter.indexOf(name)
-      if (index === -1) {
-        this.tagFilter.push(name)
-        this.$ga.event('list_people', 'filter_add', name)
-      } else {
-        this.tagFilter.splice(index, 1)
-        this.$ga.event('list_people', 'filter_remove', name)
-      }
+    openFilters (name) {
+      this.$store.dispatch('aside/set', 'filters')
+
+      this.$store.dispatch('track/event', {
+        category: 'search',
+        action: 'all_filters'
+      })
     }
   }
 }

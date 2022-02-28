@@ -202,6 +202,9 @@ export default {
       return (this.$settings.personTagCategories && this.$settings.personTagCategories.split(',')) || null
     }
   },
+  // created () {
+  //   this.$store.dispatch('track/page', this.$route.query.aside)
+  // },
   methods: {
     categoryTags (category) {
       return this.person.Tag.filter(tag => tag.category && tag.category === category) || []

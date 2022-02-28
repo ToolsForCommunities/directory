@@ -61,7 +61,9 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/i18n',
-    '@nuxtjs/firebase'
+    '@nuxtjs/firebase',
+    // ['@nuxtjs/google-gtag', { id: process.env.VUE_APP_ANALYTICS_ID }]
+    '@nuxtjs/google-gtag'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -86,6 +88,12 @@ export default {
 
   // Firebase config options
   firebase,
+
+  // Analytics options
+  'google-gtag': {
+    id: process.env.VUE_APP_ANALYTICS_ID,
+    debug: true
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
