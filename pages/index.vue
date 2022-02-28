@@ -164,7 +164,9 @@ export default {
     width: 100% !important;
     height: 56vw !important;
   }
+}
 
+@media screen and (max-width: 1264px)  {
   .newcommers >>> .row div:last-child {
     display: none;
   }
