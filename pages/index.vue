@@ -102,7 +102,11 @@
 <script>
 export default {
   fetch () {
-    this.$store.dispatch('news/list')
+    return Promise.all([
+      this.$store.dispatch('people/list'),
+      this.$store.dispatch('startups/list'),
+      this.$store.dispatch('news/list')
+    ])
   },
   head () {
     return {

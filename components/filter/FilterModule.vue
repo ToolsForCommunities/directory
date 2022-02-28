@@ -13,7 +13,7 @@
         @change="change"
       >
         <v-chip
-          v-for="tag in tags"
+          v-for="tag in showTags"
           :key="tag.id"
           filter
           outlined
@@ -22,6 +22,13 @@
           {{ tag.name }}
         </v-chip>
       </v-chip-group>
+      <CTButton
+        v-if="tags.length > maxTagsCollapsed"
+        text
+        @click="collapsed = !collapsed"
+      >
+        See {{ collapsed ? 'more' : 'less'}}
+      </CTButton>
     </v-card-text>
   </v-card>
 </template>
@@ -45,8 +52,19 @@ export default {
     }
   },
   data: () => ({
-    selected: []
+    selected: [],
+    maxTagsCollapsed: 20,
+    collapsed: true
   }),
+  computed: {
+    showTags () {
+      if (this.collapsed) {
+        return this.tags.slice(0, this.maxTagsCollapsed)
+      }
+
+      return this.tags
+    }
+  },
   watch: {
     initial () {
       this.setSelected()

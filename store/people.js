@@ -16,7 +16,6 @@ export const state = () => ({
  */
 function getSelected (state) {
   const list = filterByTags(state.list, state.filters.map(item => item && item.name)) || []
-  console.log('UPDATE!')
   return filterByPrograms(list, state.programs) || []
 }
 
@@ -69,6 +68,10 @@ export const actions = {
   },
   setPrograms ({ commit }, programs) {
     commit('SET_PROGRAMS', programs)
+  },
+  clearFilters ({ commit }) {
+    commit('SET_FILTERS', [])
+    commit('SET_PROGRAMS', [])
   }
 }
 

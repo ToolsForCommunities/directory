@@ -15,6 +15,7 @@
 
     <CTButton
       text
+      @click="$emit('clear')"
     >
       Clear all
     </CTButton>

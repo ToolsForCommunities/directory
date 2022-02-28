@@ -2,7 +2,9 @@
   <AsideCard>
     <!-- Toolbar -->
     <template slot="toolbar">
-      <AsideNavigationFilter />
+      <AsideNavigationFilter
+        @clear="clearAll"
+      />
     </template>
     <!-- /Toolbar -->
 
@@ -10,6 +12,7 @@
     <FilterModule
       v-if="hasProgram"
       :tags="programs"
+      :initial="activePrograms"
       title="Programs"
       @change="setPrograms"
     />
@@ -18,10 +21,10 @@
     <v-divider />
 
     <!-- Locations -->
-    <!-- <FilterModule
+    <FilterModule
       :tags="locations"
       title="Locations"
-    /> -->
+    />
     <!-- /Locations -->
 
     <v-divider />
@@ -64,6 +67,9 @@ export default {
     categoryFilters: {},
     allCategoryFilters: []
   }),
+  fetch () {
+    return this.$store.dispatch('tag/list')
+  },
   computed: {
     page () {
       const defaultTab = 'people'
@@ -193,7 +199,6 @@ export default {
       })
     },
     setPrograms (selected) {
-      console.log(selected.map(item => item.name))
       return this.$store.dispatch(`${this.filterSource}/setPrograms`, selected.map(item => item.name))
     },
     setUncategorizedFilters (selected) {
@@ -226,6 +231,15 @@ export default {
       ]
 
       return this.$store.dispatch(`${this.filterSource}/setFilters`, selected)
+    },
+    clearAll () {
+      this.activePrograms = []
+      this.locationFilter = []
+      this.uncategorizedFilters = []
+      this.allCategoryFilters = []
+      this.categoryFilters = {}
+
+      return this.$store.dispatch(`${this.filterSource}/clearFilters`)
     }
   }
 }
