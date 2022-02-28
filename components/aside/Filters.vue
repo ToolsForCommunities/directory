@@ -1,80 +1,58 @@
 <template>
-  <div>
-    <v-card outlined class="ma-0 ma-md-4">
-      <!-- Toolbar -->
-      <v-toolbar
-        flat
-        dense
+  <AsideCard>
+    <!-- Toolbar -->
+    <template slot="toolbar">
+      <AsideNavigationFilter />
+    </template>
+    <!-- /Toolbar -->
+
+    <!-- Programs -->
+    <FilterModule
+      v-if="hasProgram"
+      :tags="programs"
+      title="Programs"
+      @change="setPrograms"
+    />
+    <!-- /Programs -->
+
+    <v-divider />
+
+    <!-- Locations -->
+    <!-- <FilterModule
+      :tags="locations"
+      title="Locations"
+    /> -->
+    <!-- /Locations -->
+
+    <v-divider />
+
+    <!-- Tag Categories -->
+    <div v-if="tagCategories.length > 0">
+      <div
+        v-for="tagsCategory in tagCategories"
+        :key="tagsCategory.name"
       >
-        <v-btn
-          icon
-          @click="$store.dispatch('aside/clear')"
-        >
-          <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
-        <v-toolbar-title>Filters</v-toolbar-title>
-
-        <v-spacer />
-
-        <CTButton
-          text
-        >
-          Clear all
-        </CTButton>
-      </v-toolbar>
-      <v-divider />
-      <!-- /Toolbar -->
-
-      <div class="mx-4">
-        <!-- Programs -->
         <FilterModule
-          v-if="hasProgram"
-          :tags="programs"
-          title="Programs"
-          @change="setPrograms"
-        />
-        <!-- /Programs -->
-
-        <v-divider />
-
-        <!-- Locations -->
-        <!-- <FilterModule
-          :tags="locations"
-          title="Locations"
-        /> -->
-        <!-- /Locations -->
-
-        <v-divider />
-
-        <!-- Tag Categories -->
-        <div v-if="tagCategories.length > 0">
-          <div
-            v-for="tagsCategory in tagCategories"
-            :key="tagsCategory.name"
-          >
-            <FilterModule
-              :tags="tagsCategory.tags"
-              :title="tagsCategory.name"
-              :initial="selectedTags"
-              @change="(selected) => setCategoryFilters(tagsCategory.name, selected)"
-            />
-          </div>
-        </div>
-        <!-- /Tag Categories -->
-
-        <v-divider />
-
-        <!-- All filters -->
-        <FilterModule
-          :tags="tags"
+          :tags="tagsCategory.tags"
+          :title="tagsCategory.name"
           :initial="selectedTags"
-          title="Todos los filtros"
-          @change="setUncategorizedFilters"
+          @change="(selected) => setCategoryFilters(tagsCategory.name, selected)"
         />
-        <!-- /All filters -->
       </div>
-    </v-card>
-  </div>
+    </div>
+    <!-- /Tag Categories -->
+
+    <v-divider />
+
+    <!-- All filters -->
+    <FilterModule
+      :tags="tags"
+      :initial="selectedTags"
+      title="Todos los filtros"
+      @change="setUncategorizedFilters"
+    />
+    <!-- /All filters -->
+  </AsideCard>
 </template>
 
 <script>

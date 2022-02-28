@@ -3,12 +3,12 @@ export default function ({ route, from, query, redirect }) {
   //   return false
   // }
 
-  if (from.name.includes('startup')) {
-    // query.to = 'startups'
-    return redirect({ name: route.name, query: { tab: 'startups' } })
+  if (from && from.name.includes('startup')) {
+    query.to = 'startups'
+    // return redirect({ name: route.name, query: { tab: 'startups' } })
   }
 
-  if (!from.name.includes('search')) {
+  if (from && !from.name.includes('search')) {
     query.to = 'people'
     // return redirect({ name: route.name, query: { tab: 'people' } })
   }

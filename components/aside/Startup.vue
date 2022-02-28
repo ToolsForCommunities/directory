@@ -1,142 +1,145 @@
 <template>
   <AsideCard>
+    <!-- Toolbar -->
+    <template slot="toolbar">
+      <AsideNavigationMain />
+    </template>
+
     <!-- Content -->
-    <div>
-      <!-- Picture -->
-      <v-img
-        aspect-ratio="1"
-        :src="startup.logo || '/img/nologo.png'"
-      />
-      <!-- /Picture -->
-      <!-- Info -->
-      <div>
-        <!-- Name -->
-        <v-card-title
-          class="pb-0 pt-2 pa-0 ma-0 text-center d-block text-truncate"
-          :title="startup.name"
+    <!-- Picture -->
+    <v-img
+      aspect-ratio="1"
+      :src="startup.logo || '/img/nologo.png'"
+    />
+    <!-- /Picture -->
+    <!-- Info -->
+    <div class="px-4 px-md-0">
+      <!-- Name -->
+      <v-card-title
+        class="pb-0 pt-2 pa-0 ma-0 text-center d-block text-truncate"
+        :title="startup.name"
+      >
+        {{ startup.name }}
+      </v-card-title>
+      <!-- /Name -->
+
+      <!-- Connect CTA -->
+      <div class="text-center">
+        <a
+          :href="startup.website"
+          target="_blank"
         >
-          {{ startup.name }}
-        </v-card-title>
-        <!-- /Name -->
-
-        <!-- Connect CTA -->
-        <div class="text-center">
-          <a
-            :href="startup.website"
-            target="_blank"
+          <CTButton
+            outline
+            class="my-2"
           >
-            <CTButton
-              outline
-              class="my-2"
-            >
-              <span>{{ startup.website }}</span>
-              <v-icon right>
-                mdi-open-in-new
-              </v-icon>
-            </CTButton>
-          </a>
+            <span>{{ startup.website }}</span>
+            <v-icon right>
+              mdi-open-in-new
+            </v-icon>
+          </CTButton>
+        </a>
+      </div>
+      <!-- /Connect CTA -->
+
+      <!-- About -->
+      <div class="py-4">
+        <span class="subtitle-1">About {{ startup.name }}</span>
+        <!-- Bio -->
+        <div class="body-2">
+          <span>
+            {{ startup.bio }}
+          </span>
         </div>
-        <!-- /Connect CTA -->
+        <!-- /Bio -->
 
-        <!-- About -->
-        <div class="py-4">
-          <span class="subtitle-1">About {{ startup.name }}</span>
-          <!-- Bio -->
-          <div class="body-2">
-            <span>
-              {{ startup.bio }}
-            </span>
-          </div>
-          <!-- /Bio -->
+        <!-- Chips -->
+        <div class="mt-4">
+          <!-- Location -->
+          <v-chip
+            v-if="$settings.hasLocation && startup.location"
+            outlined
+            class="my-1 mr-2"
+          >
+            <v-icon small left color="#757575">
+              mdi-map-marker
+            </v-icon>
+            {{ startup.location }}
+          </v-chip>
 
-          <!-- Chips -->
-          <div class="mt-4">
-            <!-- Location -->
+          <!-- Programs -->
+          <!-- Program -->
+          <span v-if="$settings.hasProgram && startup.program">
             <v-chip
-              v-if="$settings.hasLocation && startup.location"
+              v-for="program in startup.program.split(',')"
+              :key="program"
               outlined
-              class="my-1 mr-2"
             >
               <v-icon small left color="#757575">
-                mdi-map-marker
+                mdi-account-group
               </v-icon>
-              {{ startup.location }}
+              {{ program }}
             </v-chip>
+          </span>
 
-            <!-- Programs -->
-            <!-- Program -->
-            <span v-if="$settings.hasProgram && startup.program">
-              <v-chip
-                v-for="program in startup.program.split(',')"
-                :key="program"
-                outlined
-              >
-                <v-icon small left color="#757575">
-                  mdi-account-group
-                </v-icon>
-                {{ program }}
-              </v-chip>
-            </span>
-
-            <!-- Member since -->
-            <!-- <v-chip
-              v-if="$settings.hasMembership && startup.joinedAt"
-              filter
-              outlined
-            >
-              <v-icon left color="#757575">
-                mdi-calendar
-              </v-icon>
-              Member since 2015
-            </v-chip> -->
-          </div>
-          <!-- /Chips -->
-        </div>
-        <!-- /About -->
-
-        <v-divider />
-
-        <!-- Tags -->
-        <div v-if="tags && tags.length > 0" class="py-4">
-          <span class="subtitle-1">Tags</span>
-          <TagList :tags="tags" />
-        </div>
-        <!-- /Tags -->
-
-        <!-- Custom Tags -->
-        <div v-if="tags && tags.length > 0">
-          <div
-            v-for="tagsCategory in tagCategories"
-            :key="tagsCategory.name"
-            class="py-4"
+          <!-- Member since -->
+          <!-- <v-chip
+            v-if="$settings.hasMembership && startup.joinedAt"
+            filter
+            outlined
           >
-            <span class="subtitle-1">
-              {{ tagsCategory.name }}
-            </span>
-            <TagList :tags="tagsCategory.tags" />
-          </div>
+            <v-icon left color="#757575">
+              mdi-calendar
+            </v-icon>
+            Member since 2015
+          </v-chip> -->
         </div>
-        <!-- /Custom Tags -->
-
-        <v-divider />
-
-        <!-- Team -->
-        <div class="py-4">
-          <span class="subtitle-1">Team</span>
-          <PersonList :people="startup.persons" />
-        </div>
-        <!-- /Team -->
-
-        <v-divider />
-
-        <!-- Social -->
-        <div class="py-4">
-          <SocialProfiles :item="startup" />
-        </div>
-        <!-- /Social -->
+        <!-- /Chips -->
       </div>
-      <!-- /Info -->
+      <!-- /About -->
+
+      <v-divider />
+
+      <!-- Tags -->
+      <div v-if="tags && tags.length > 0" class="py-4">
+        <span class="subtitle-1">Tags</span>
+        <TagList :tags="tags" />
+      </div>
+      <!-- /Tags -->
+
+      <!-- Custom Tags -->
+      <div v-if="tags && tags.length > 0">
+        <div
+          v-for="tagsCategory in tagCategories"
+          :key="tagsCategory.name"
+          class="py-4"
+        >
+          <span class="subtitle-1">
+            {{ tagsCategory.name }}
+          </span>
+          <TagList :tags="tagsCategory.tags" />
+        </div>
+      </div>
+      <!-- /Custom Tags -->
+
+      <v-divider />
+
+      <!-- Team -->
+      <div class="py-4">
+        <span class="subtitle-1">Team</span>
+        <PersonList :people="startup.persons" />
+      </div>
+      <!-- /Team -->
+
+      <v-divider />
+
+      <!-- Social -->
+      <div class="py-4">
+        <SocialProfiles :item="startup" />
+      </div>
+      <!-- /Social -->
     </div>
+    <!-- /Info -->
   </AsideCard>
 </template>
 
