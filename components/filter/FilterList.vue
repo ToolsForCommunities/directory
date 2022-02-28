@@ -38,6 +38,7 @@
 
 <script type="text/javascript">
 import getTagIndex from '@/assets/js/helpers/getTagIndex'
+import getViewCategory from '@/assets/js/helpers/getViewCategory'
 
 export default {
   props: {
@@ -70,7 +71,6 @@ export default {
   },
   watch: {
     selectedFilters () {
-      console.log('Initial changed')
       this.setSelected()
     }
   },
@@ -96,6 +96,15 @@ export default {
 
       // And set the tags
       const tags = this.selected.map(i => this.tags[i - 1])
+
+      // Track the event
+      this.$store.dispatch('track/event', {
+        action: 'filter_list',
+        category: getViewCategory(this.$route.name.split('__')[0]),
+        label: 'tags',
+        value: tags.length
+      })
+
       return this.$store.dispatch(`${this.filterSource}/setFilters`, tags)
     },
     setSelected () {

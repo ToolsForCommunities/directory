@@ -21,10 +21,10 @@
     <v-divider />
 
     <!-- Locations -->
-    <FilterModule
+    <!-- <FilterModule
       :tags="locations"
       title="Locations"
-    />
+    /> -->
     <!-- /Locations -->
 
     <v-divider />
@@ -51,7 +51,7 @@
     <FilterModule
       :tags="tags"
       :initial="selectedTags"
-      title="Todos los filtros"
+      title="All filters"
       @change="setUncategorizedFilters"
     />
     <!-- /All filters -->
@@ -59,6 +59,8 @@
 </template>
 
 <script>
+import getViewCategory from '@/assets/js/helpers/getViewCategory'
+
 export default {
   data: () => ({
     activePrograms: [],
@@ -199,6 +201,13 @@ export default {
       })
     },
     setPrograms (selected) {
+      this.$store.dispatch('track/event', {
+        action: 'filter',
+        category: getViewCategory(this.$route.name.split('__')[0]),
+        label: 'programs',
+        value: selected.length
+      })
+
       return this.$store.dispatch(`${this.filterSource}/setPrograms`, selected.map(item => item.name))
     },
     setUncategorizedFilters (selected) {
@@ -220,7 +229,7 @@ export default {
       }
       this.allCategoryFilters = allCategoryFilters
 
-      // And upate the search filters
+      // And update the search filters
       this.setFilters()
     },
     setFilters () {
@@ -230,6 +239,12 @@ export default {
         ...this.allCategoryFilters
       ]
 
+      this.$store.dispatch('track/event', {
+        action: 'filter',
+        category: getViewCategory(this.$route.name.split('__')[0]),
+        label: 'tags',
+        value: selected.length
+      })
       return this.$store.dispatch(`${this.filterSource}/setFilters`, selected)
     },
     clearAll () {
@@ -238,6 +253,11 @@ export default {
       this.uncategorizedFilters = []
       this.allCategoryFilters = []
       this.categoryFilters = {}
+
+      this.$store.dispatch('track/event', {
+        action: 'clear_filters',
+        category: getViewCategory(this.$route.name.split('__')[0])
+      })
 
       return this.$store.dispatch(`${this.filterSource}/clearFilters`)
     }
