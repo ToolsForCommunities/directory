@@ -37,6 +37,8 @@
 </template>
 
 <script type="text/javascript">
+import getTagIndex from '@/assets/js/helpers/getTagIndex'
+
 export default {
   props: {
     for: {
@@ -53,7 +55,27 @@ export default {
   computed: {
     tags () {
       return this.$store.getters['tag/getByTarget'](this.for)
+    },
+    filterSource () {
+      // Select the page to filter in
+      let filterSource = this.for
+      if (this.for === 'all') {
+        filterSource = 'search'
+      }
+      return filterSource
+    },
+    selectedFilters () {
+      return this.$store.state[this.filterSource].filters
     }
+  },
+  watch: {
+    selectedFilters () {
+      console.log('Initial changed')
+      this.setSelected()
+    }
+  },
+  mounted () {
+    this.setSelected()
   },
   methods: {
     allFilters () {
@@ -72,15 +94,21 @@ export default {
         return false
       }
 
-      // Select the page to filter in
-      let filterSource = this.for
-      if (this.for === 'all') {
-        filterSource = 'search'
-      }
-
       // And set the tags
       const tags = this.selected.map(i => this.tags[i - 1])
-      return this.$store.dispatch(`${filterSource}/setFilters`, tags)
+      return this.$store.dispatch(`${this.filterSource}/setFilters`, tags)
+    },
+    setSelected () {
+      const selected = this.selectedFilters || []
+      this.selected = []
+
+      for (let i = 0; i < selected.length; i++) {
+        const index = getTagIndex(this.tags, selected[i])
+
+        if (index > -1) {
+          this.selected.push(index + 1)
+        }
+      }
     }
   }
 }

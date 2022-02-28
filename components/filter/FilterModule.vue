@@ -10,6 +10,7 @@
         column
         multiple
         active-class="primary--text"
+        @change="change"
       >
         <v-chip
           v-for="tag in tags"
@@ -26,6 +27,8 @@
 </template>
 
 <script>
+import getTagIndex from '@/assets/js/helpers/getTagIndex'
+
 export default {
   props: {
     title: {
@@ -35,10 +38,40 @@ export default {
     tags: {
       type: Array,
       default: () => []
+    },
+    initial: {
+      type: Array,
+      default: () => []
     }
   },
   data: () => ({
     selected: []
-  })
+  }),
+  watch: {
+    initial () {
+      this.setSelected()
+    }
+  },
+  mounted () {
+    this.setSelected()
+  },
+  methods: {
+    change () {
+      const tags = this.selected.map(i => this.tags[i])
+      this.$emit('change', tags)
+    },
+    setSelected () {
+      const selected = this.initial
+      this.selected = []
+
+      for (let i = 0; i < selected.length; i++) {
+        const index = getTagIndex(this.tags, selected[i])
+
+        if (index > -1) {
+          this.selected.push(index)
+        }
+      }
+    }
+  }
 }
 </script>

@@ -11,13 +11,17 @@
         centered
         fixed-tabs
       >
-        <v-tab>
+        <!-- <v-tab>
           All
-        </v-tab>
-        <v-tab>
+        </v-tab> -->
+        <v-tab
+          @click="$router.replace({ query: { tab: 'people' } })"
+        >
           People
         </v-tab>
-        <v-tab>
+        <v-tab
+          @click="$router.replace({ query: { tab: 'startups' } })"
+        >
           Startups
         </v-tab>
       </v-tabs>
@@ -26,9 +30,9 @@
     <v-container>
       <v-tabs-items v-model="tab">
         <!-- All tab -->
-        <v-tab-item>
+        <!-- <v-tab-item>
           <h2>All results</h2>
-        </v-tab-item>
+        </v-tab-item> -->
 
         <!-- People tab -->
         <v-tab-item>
@@ -52,6 +56,7 @@
 
 <script>
 export default {
+  middleware: ['search'],
   data: () => ({
     tab: null,
     searchText: '',
@@ -63,6 +68,19 @@ export default {
       this.$store.dispatch('people/list'),
       this.$store.dispatch('startups/list')
     ])
+  },
+  head () {
+    return {
+      titleTemplate: `%s - ${this.$settings.title}` || '%s - Community Tools',
+      title: 'People',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'All the people in your directory'
+        }
+      ]
+    }
   },
   computed: {
     people () {

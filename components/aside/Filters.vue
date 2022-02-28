@@ -31,16 +31,17 @@
           v-if="hasProgram"
           :tags="programs"
           title="Programs"
+          @change="setPrograms"
         />
         <!-- /Programs -->
 
         <v-divider />
 
         <!-- Locations -->
-        <FilterModule
+        <!-- <FilterModule
           :tags="locations"
           title="Locations"
-        />
+        /> -->
         <!-- /Locations -->
 
         <v-divider />
@@ -54,6 +55,8 @@
             <FilterModule
               :tags="tagsCategory.tags"
               :title="tagsCategory.name"
+              :initial="selectedTags"
+              @change="(selected) => setCategoryFilters(tagsCategory.name, selected)"
             />
           </div>
         </div>
@@ -63,8 +66,10 @@
 
         <!-- All filters -->
         <FilterModule
-          :tags="$store.state.tag.list"
+          :tags="tags"
+          :initial="selectedTags"
           title="Todos los filtros"
+          @change="setUncategorizedFilters"
         />
         <!-- /All filters -->
       </div>
@@ -77,11 +82,18 @@ export default {
   data: () => ({
     activePrograms: [],
     locationFilter: [],
-    tagFilter: []
+    uncategorizedFilters: [],
+    categoryFilters: {},
+    allCategoryFilters: []
   }),
   computed: {
     page () {
-      const name = this.$route.name
+      const defaultTab = 'people'
+      let name = this.$route.name
+
+      if (name.toLowerCase().includes('search')) {
+        name = this.$route.query.tab || defaultTab
+      }
 
       if (name.toLowerCase().includes('people')) {
         return 'people'
@@ -93,8 +105,24 @@ export default {
 
       return 'all'
     },
+    filterSource () {
+      // Select the page to filter in
+      let filterSource = this.page
+      if (this.for === 'all') {
+        filterSource = 'search'
+      }
+
+      return filterSource
+    },
     tags () {
-      return this.$store.getters['tag/getByTarget'](this.for)
+      return this.$store.getters['tag/getByTarget'](this.page)
+    },
+    selectedTags () {
+      if (this.filterSource === 'all') {
+        return []
+      }
+
+      return this.$store.state[this.filterSource].filters
     },
     hasProgram () {
       return this.$settings.hasProgram && this.$settings.programOptions
@@ -185,6 +213,41 @@ export default {
       return this.tags.filter((tag) => {
         return tag.category && tag.category.toUpperCase() === category.toUpperCase()
       })
+    },
+    setPrograms (selected) {
+      console.log(selected.map(item => item.name))
+      return this.$store.dispatch(`${this.filterSource}/setPrograms`, selected.map(item => item.name))
+    },
+    setUncategorizedFilters (selected) {
+      this.uncategorizedFilters = selected
+      this.setFilters()
+    },
+    setCategoryFilters (category, selected) {
+      // Store selected filters for this category
+      this.categoryFilters[category] = selected || []
+
+      // Set a plain array with all the tags selected
+      const keys = Object.keys(this.categoryFilters)
+      let allCategoryFilters = []
+      for (const i in keys) {
+        allCategoryFilters = [
+          ...allCategoryFilters,
+          ...this.categoryFilters[keys[i]]
+        ]
+      }
+      this.allCategoryFilters = allCategoryFilters
+
+      // And upate the search filters
+      this.setFilters()
+    },
+    setFilters () {
+      // Get currently selected
+      const selected = [
+        ...this.uncategorizedFilters,
+        ...this.allCategoryFilters
+      ]
+
+      return this.$store.dispatch(`${this.filterSource}/setFilters`, selected)
     }
   }
 }

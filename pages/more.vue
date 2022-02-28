@@ -204,15 +204,18 @@ export default {
   fetch () {
     return this.$store.dispatch('faq/list')
   },
-  head: {
-    title: 'FAQ',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Get answer to every single question about your community'
-      }
-    ]
+  head () {
+    return {
+      titleTemplate: `%s - ${this.$settings.title}` || '%s - Community Tools',
+      title: 'FAQ',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Get answer to every single question about your community'
+        }
+      ]
+    }
   },
   computed: {
     faq () {

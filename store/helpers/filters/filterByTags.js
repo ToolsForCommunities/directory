@@ -13,7 +13,8 @@ function inArray (array, data) {
   return found
 }
 
-function filterByTags (list, tags, programs) {
+// function filterByTags (list, tags, programs) {
+function filterByTags (list, tags) {
   let filtered = list
 
   if (Array.isArray(tags) && tags.length !== 0) {
@@ -33,22 +34,22 @@ function filterByTags (list, tags, programs) {
     })
   }
 
-  if (Array.isArray(programs) && programs.length !== 0) {
-    // Filter by programs
-    filtered = filtered.filter((person) => {
-      if (!person.program) {
-        return false
-      }
+  // if (Array.isArray(programs) && programs.length !== 0) {
+  //   // Filter by programs
+  //   filtered = filtered.filter((person) => {
+  //     if (!person.program) {
+  //       return false
+  //     }
 
-      for (let i = 0; i < programs.length; i += 1) {
-        if (person.program.includes(programs[i])) {
-          return true
-        }
-      }
+  //     for (let i = 0; i < programs.length; i += 1) {
+  //       if (person.program.includes(programs[i])) {
+  //         return true
+  //       }
+  //     }
 
-      return false
-    })
-  }
+  //     return false
+  //   })
+  // }
 
   return filtered
 }

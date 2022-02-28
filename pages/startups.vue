@@ -59,15 +59,18 @@ export default {
       this.$store.dispatch('startups/list')
     ])
   },
-  head: {
-    title: 'Startups',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'All the startups in your directory'
-      }
-    ]
+  head () {
+    return {
+      titleTemplate: `%s - ${this.$settings.title}` || '%s - Community Tools',
+      title: 'Startups',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'All the startups in your directory'
+        }
+      ]
+    }
   },
   computed: {
     tags () {

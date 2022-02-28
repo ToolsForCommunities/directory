@@ -23,15 +23,18 @@ export default {
   fetch () {
     return this.$store.dispatch('people/list')
   },
-  head: {
-    title: 'People',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'All the people in your directory'
-      }
-    ]
+  head () {
+    return {
+      titleTemplate: `%s - ${this.$settings.title}` || '%s - Community Tools',
+      title: 'People',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'All the people in your directory'
+        }
+      ]
+    }
   },
   computed: {
     people () {

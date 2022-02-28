@@ -26,8 +26,11 @@ import firebase from 'firebase'
 
 export default {
   layout: 'default',
-  head: {
-    title: 'Login'
+  head () {
+    return {
+      titleTemplate: `%s - ${this.$settings.title}` || '%s - Community Tools',
+      title: 'Login'
+    }
   },
   created () {
     this.auth()

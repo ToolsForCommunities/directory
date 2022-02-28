@@ -2,18 +2,22 @@ import axios from 'axios'
 
 import api from '@/store/helpers/api'
 import filterByTags from '@/store/helpers/filters/filterByTags'
+import filterByPrograms from '@/store/helpers/filters/filterByPrograms'
 
 export const state = () => ({
   isLoading: false,
   list: [],
-  filters: []
+  filters: [],
+  programs: []
 })
 
 /**
  *  Get selected people
  */
 function getSelected (state) {
-  return filterByTags(state.list, state.filters.map(item => item && item.name)) || []
+  const list = filterByTags(state.list, state.filters.map(item => item && item.name)) || []
+  console.log('UPDATE!')
+  return filterByPrograms(list, state.programs) || []
 }
 
 export const getters = {
@@ -62,6 +66,9 @@ export const actions = {
   },
   setFilters ({ commit }, filters) {
     commit('SET_FILTERS', filters)
+  },
+  setPrograms ({ commit }, programs) {
+    commit('SET_PROGRAMS', programs)
   }
 }
 
@@ -74,5 +81,8 @@ export const mutations = {
   },
   SET_FILTERS (state, filters) {
     state.filters = filters
+  },
+  SET_PROGRAMS (state, programs) {
+    state.programs = programs
   }
 }

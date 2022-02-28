@@ -57,7 +57,9 @@
             </v-card-subtitle>
             <!-- <div class="d-flex" style="width: 100%;"> -->
 
-            <PersonCardList :people="newcommers" />
+            <div class="newcommers">
+              <PersonCardList :people="newcommers" />
+            </div>
 
             <v-card-actions class="d-flex justify-center">
               <nuxt-link to="people">
@@ -102,15 +104,18 @@ export default {
   fetch () {
     this.$store.dispatch('news/list')
   },
-  head: {
-    title: 'Home',
-    meta: [
-      {
-        hid: 'description',
-        name: 'description',
-        content: 'Your community, connected'
-      }
-    ]
+  head () {
+    return {
+      titleTemplate: `%s - ${this.$settings.title}` || '%s - Community Tools',
+      title: 'Home',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Your community, connected'
+        }
+      ]
+    }
   },
   computed: {
     newcommers () {
@@ -158,6 +163,10 @@ export default {
   .v-avatar {
     width: 100% !important;
     height: 56vw !important;
+  }
+
+  .newcommers >>> .row div:last-child {
+    display: none;
   }
 }
 </style>

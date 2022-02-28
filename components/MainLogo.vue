@@ -1,15 +1,28 @@
 <template>
   <div class="ct-logo">
     <span class="ct-logo-text">
-      Community Tools
+      {{ logo }}
     </span>
     <img
       class="ct-logo-image"
-      alt="Community Tools"
-      src="/img/logo.svg"
+      :alt="title"
+      :src="logo"
     >
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    title () {
+      return this.$settings.title || 'Community Tools'
+    },
+    logo () {
+      return this.$settings.logo || 'img/logo.svg'
+    }
+  }
+}
+</script>
 
 <style scoped>
 .ct-logo {

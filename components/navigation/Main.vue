@@ -51,6 +51,17 @@ export default {
       const desktop = ['md', 'lg', 'xl']
       return desktop.includes(this.$vuetify.breakpoint.name)
     }
+  },
+  mounted () {
+    if (this.$settings.peopleText) {
+      this.items[2].name = this.$settings.peopleText
+    }
+    if (this.$settings.startupsText) {
+      this.items[3].name = this.$settings.startupsText
+    }
+    if (this.$settings.moreText) {
+      this.items[4].name = this.$settings.moreText
+    }
   }
 }
 </script>
