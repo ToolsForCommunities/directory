@@ -4,7 +4,8 @@ import api from '@/store/helpers/api'
 
 export const state = () => ({
   isLoading: false,
-  data: {}
+  data: {},
+  host: ''
 })
 
 export const actions = {
@@ -16,11 +17,17 @@ export const actions = {
 
         return data
       })
+  },
+  setHost ({ commit }, host) {
+    commit('SET_HOST', host)
   }
 }
 
 export const mutations = {
   SET_DATA (state, data) {
     state.data = data
+  },
+  SET_HOST (state, host) {
+    state.host = host
   }
 }
