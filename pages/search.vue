@@ -39,7 +39,7 @@
           <PersonCardList :people="people" />
 
           <!-- Infinite scroll dispatcher -->
-          <div v-intersect="infiniteScrolling('people')" class="py-4" />
+          <div v-intersect="infiniteScrollingPeople" class="py-4" />
         </v-tab-item>
 
         <!-- Startup tab -->
@@ -47,7 +47,7 @@
           <StartupCardList :startups="startups" />
 
           <!-- Infinite scroll dispatcher -->
-          <div v-intersect="infiniteScrolling('startups')" class="py-4" />
+          <div v-intersect="infiniteScrollingStartups" class="py-4" />
         </v-tab-item>
       </v-tabs-items>
     </v-container>
@@ -58,7 +58,7 @@
 export default {
   middleware: ['search'],
   data: () => ({
-    tab: null,
+    tab: 0,
     searchText: '',
     peopleToShow: 12,
     startupsToShow: 12
@@ -72,12 +72,12 @@ export default {
   head () {
     return {
       titleTemplate: `%s - ${this.$settings.title}` || '%s - Community Tools',
-      title: 'People',
+      title: 'Search',
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: 'All the people in your directory'
+          content: 'Search for anyone in your directory'
         }
       ]
     }
@@ -105,6 +105,12 @@ export default {
   methods: {
     search (text) {
       this.searchText = text
+    },
+    infiniteScrollingPeople () {
+      return this.infiniteScrolling('people')
+    },
+    infiniteScrollingStartups () {
+      return this.infiniteScrolling('startups')
     },
     infiniteScrolling (page) {
       const itemsToAdd = 9
