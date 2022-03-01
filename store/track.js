@@ -1,7 +1,3 @@
-export const state = () => ({
-  isLoading: false
-})
-
 export const actions = {
   event (ctx, { action, category, label, value }) {
     const event = {}

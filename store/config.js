@@ -1,4 +1,4 @@
-// import axios from 'axios'
+import axios from 'axios'
 
 import api from '@/store/helpers/api'
 
@@ -9,18 +9,12 @@ export const state = () => ({
 
 export const actions = {
   get ({ commit }) {
-    return this.$axios.get(`${api.url}/config`)
-      // .then(response => {
-      //   console.log()
-      //   response.data
-      // })
+    return axios.get(`${api.url}/config`)
+      .then(response => response.data)
       .then((data) => {
         commit('SET_DATA', data)
 
         return data
-      })
-      .catch((e) => {
-        console.log(e)
       })
   }
 }

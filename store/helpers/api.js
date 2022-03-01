@@ -9,9 +9,6 @@ function setUrl (url, env) {
   if (env !== 'production' && url) {
     data.url = url
   }
-
-  console.log('-> data.url:')
-  console.log(data.url)
 }
 
 export default data
