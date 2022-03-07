@@ -17,7 +17,6 @@ function init ({ dispatch }, { $config, req }) {
 
   // Prepare app settings
   dispatch('config/setHost', host, { global: true })
-  dispatch('config/get', { global: true })
 }
 
 export const actions = {

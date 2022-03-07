@@ -42,6 +42,18 @@ export default {
   data: () => ({
     loading: true
   }),
+  fetch () {
+    if (this.$store.state.config.hasLoaded === true) {
+      return Promise.resolve()
+    }
+
+    return this.$store.dispatch('config/get')
+  },
+  head () {
+    return {
+      titleTemplate: `%s - ${this.$settings.title}` || '%s - Community Tools'
+    }
+  },
   computed: {
     hideAside () {
       const isDesktop = checkIsDesktop(this.$vuetify.breakpoint.name)

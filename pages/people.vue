@@ -25,13 +25,13 @@ export default {
   },
   head () {
     return {
-      titleTemplate: `%s - ${this.$settings.title}` || '%s - Community Tools',
-      title: 'People',
+      // title: 'People',
+      title: this.$settings.peopleText || 'People',
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: 'All the people in your directory'
+          content: `All the ${this.$settings.peopleText || 'people'} in your directory`
         }
       ]
     }

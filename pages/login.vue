@@ -28,7 +28,6 @@ export default {
   layout: 'default',
   head () {
     return {
-      titleTemplate: `%s - ${this.$settings.title}` || '%s - Community Tools',
       title: 'Login'
     }
   },
