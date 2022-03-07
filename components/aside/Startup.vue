@@ -32,7 +32,7 @@
           <CTButton
             outline
             class="my-2"
-            @click="$store.dispatch('track/event', { action: 'website', categrory: 'startup_detail', label: startup.id })"
+            @click="$store.dispatch('track/event', { action: 'website', category: 'startup_detail', label: startup.id })"
           >
             <span>{{ startup.website }}</span>
             <v-icon right>

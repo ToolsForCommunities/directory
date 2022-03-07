@@ -35,7 +35,7 @@
           <span>
             <nuxt-link
               :to="'?aside=startup/'+startup.id"
-              @click.native="$store.dispatch('track/event', { action: 'view_startup', categrory: 'person_detail', label: person.id })"
+              @click.native="$store.dispatch('track/event', { action: 'view_startup', category: 'person_detail', label: person.id })"
             >
               {{ startup.name }}
             </nuxt-link>

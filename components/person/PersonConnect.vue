@@ -10,7 +10,7 @@
         <CTButton
           primary
           class="my-4 mx-1"
-          @click="$store.dispatch('track/event', { action: 'connect', categrory: 'person_detail', label: platform.field })"
+          @click="$store.dispatch('track/event', { action: 'connect', category: 'person_detail', label: platform.field })"
         >
           {{ platform.name }}
         </CTButton>
