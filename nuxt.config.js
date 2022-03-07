@@ -92,7 +92,7 @@ export default {
   // Analytics options
   'google-gtag': {
     id: process.env.VUE_APP_ANALYTICS_ID,
-    debug: true
+    debug: process.env.NODE_ENV !== 'production'
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
