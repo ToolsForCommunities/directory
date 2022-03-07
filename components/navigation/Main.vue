@@ -21,27 +21,32 @@ export default {
       {
         name: 'Home',
         icon: 'mdi-home',
+        event: 'tab_home',
         route: '/'
       },
       {
         name: 'Search',
         icon: 'mdi-magnify',
+        event: 'tab_search',
         route: '/search',
         staticIcon: true
       },
       {
         name: 'People',
         icon: 'mdi-account',
+        event: 'tab_people',
         route: '/people'
       },
       {
         name: 'Startups',
         icon: 'mdi-account-multiple',
+        event: 'tab_startup',
         route: '/startups'
       },
       {
         name: 'More',
         icon: 'mdi-dots-horizontal-circle',
+        event: 'tab_more',
         route: '/more'
       }
     ]

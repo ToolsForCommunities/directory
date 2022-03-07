@@ -33,7 +33,10 @@
             {{ startup.role }}
           </span>
           <span>
-            <nuxt-link :to="'?aside=startup/'+startup.id">
+            <nuxt-link
+              :to="'?aside=startup/'+startup.id"
+              @click.native="$store.dispatch('track/event', { action: 'view_startup', categrory: 'person_detail', label: person.id })"
+            >
               {{ startup.name }}
             </nuxt-link>
           </span>
@@ -167,6 +170,14 @@
 
 <script>
 export default {
+  fetch () {
+    const list = this.$store.state.people.lists
+    if (!list || list.length === 0) {
+      return this.$store.dispatch('people/list')
+    }
+
+    return Promise.resolve()
+  },
   computed: {
     person () {
       const id = this.$store.state.aside.id

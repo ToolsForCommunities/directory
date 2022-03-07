@@ -7,6 +7,7 @@
       :key="item.name"
       :to="item.route"
       class="bottombar-link"
+      @click.native="trackLink(item)"
     >
       <CTNavigationButton
         :icon="item.icon"
@@ -26,6 +27,14 @@ export default {
     items: {
       type: Array,
       default: () => []
+    }
+  },
+  methods: {
+    trackLink (item) {
+      this.$store.dispatch('track/event', {
+        action: item.event,
+        category: 'directory_navigation'
+      })
     }
   }
 }

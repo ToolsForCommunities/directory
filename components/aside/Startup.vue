@@ -32,6 +32,7 @@
           <CTButton
             outline
             class="my-2"
+            @click="$store.dispatch('track/event', { action: 'website', categrory: 'startup_detail', label: startup.id })"
           >
             <span>{{ startup.website }}</span>
             <v-icon right>
@@ -145,6 +146,14 @@
 
 <script>
 export default {
+  fetch () {
+    const list = this.$store.state.startups.lists
+    if (!list || list.length === 0) {
+      return this.$store.dispatch('startups/list')
+    }
+
+    return Promise.resolve()
+  },
   computed: {
     startup () {
       const id = this.$store.state.aside.id

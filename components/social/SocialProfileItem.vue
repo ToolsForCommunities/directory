@@ -2,6 +2,7 @@
   <v-list-item
     :href="link"
     target="_blank"
+    @click="track"
   >
     <v-list-item-icon>
       <v-icon color="#757575">
@@ -26,6 +27,24 @@ export default {
     link: {
       type: String,
       default: ''
+    }
+  },
+  methods: {
+    track () {
+      const event = {
+        action: 'social',
+        label: this.platform.field
+      }
+
+      // Set the category based on the current screen
+      const screen = this.$store.state.aside.current
+      if (screen === 'person') {
+        event.category = 'person_detail'
+      } else if (screen === 'startup') {
+        event.category = 'startup_detail'
+      }
+
+      this.$store.dispatch('track/event', event)
     }
   }
 }

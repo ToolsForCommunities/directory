@@ -64,6 +64,10 @@ export default {
   methods: {
     expandToggle () {
       this.expanded = !this.expanded
+      this.$store.dispatch('track/event', {
+        action: this.expanded ? 'news_read_more' : 'news_read_less',
+        categrory: 'home'
+      })
     }
   }
 }

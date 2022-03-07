@@ -17,7 +17,7 @@
 
     <v-spacer />
 
-    <v-menu
+    <!-- <v-menu
       bottom
       left
     >
@@ -42,6 +42,6 @@
           <v-list-item-title>Share</v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-menu>
+    </v-menu> -->
   </v-toolbar>
 </template>

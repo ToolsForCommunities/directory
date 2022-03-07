@@ -27,7 +27,7 @@
         text
         @click="collapsed = !collapsed"
       >
-        See {{ collapsed ? 'more' : 'less'}}
+        See {{ collapsed ? 'more' : 'less' }}
       </CTButton>
     </v-card-text>
   </v-card>

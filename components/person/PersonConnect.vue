@@ -7,7 +7,11 @@
         :href="item[platform.field]"
         target="_blank"
       >
-        <CTButton primary class="my-4 mx-1">
+        <CTButton
+          primary
+          class="my-4 mx-1"
+          @click="$store.dispatch('track/event', { action: 'connect', categrory: 'person_detail', label: platform.field })"
+        >
           {{ platform.name }}
         </CTButton>
       </a>

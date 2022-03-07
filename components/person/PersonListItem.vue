@@ -1,5 +1,9 @@
 <template>
-  <v-list-item>
+  <v-list-item
+    :to="`?aside=person/${id}`"
+    nuxt
+    @click.native="track()"
+  >
     <v-list-item-avatar>
       <v-img :src="pic || '/img/nopic.png'" />
     </v-list-item-avatar>
@@ -29,6 +33,25 @@ export default {
     role: {
       type: String,
       default: ''
+    }
+  },
+  methods: {
+    track () {
+      const event = {
+        action: 'view_person',
+        category: 'person_list',
+        label: this.id
+      }
+
+      // Set the category based on the current screen
+      const screen = this.$store.state.aside.current
+      if (screen === 'person') {
+        event.category = 'person_detail'
+      } else if (screen === 'startup') {
+        event.category = 'startup_detail'
+      }
+
+      this.$store.dispatch('track/event', event)
     }
   }
 }

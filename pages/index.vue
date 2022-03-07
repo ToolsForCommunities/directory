@@ -67,6 +67,7 @@
                   text
                   to="people"
                   nuxt
+                  @click="$store.dispatch('track/event', { action: 'view_people', categrory: 'home' })"
                 >
                   See all
                 </CTButton>
