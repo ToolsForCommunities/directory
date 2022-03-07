@@ -162,7 +162,6 @@ export default {
   },
   head () {
     return {
-      titleTemplate: `%s - ${this.$settings.title}` || '%s - Community Tools',
       title: 'FAQ',
       meta: [
         {

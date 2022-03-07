@@ -4,6 +4,7 @@ import api from '@/store/helpers/api'
 
 export const state = () => ({
   isLoading: false,
+  hasLoaded: false,
   data: {},
   host: ''
 })
@@ -26,6 +27,7 @@ export const actions = {
 export const mutations = {
   SET_DATA (state, data) {
     state.data = data
+    state.hasLoaded = true
   },
   SET_HOST (state, host) {
     state.host = host

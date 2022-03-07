@@ -17,12 +17,12 @@
         <v-tab
           @click="$router.replace({ query: { tab: 'people' } })"
         >
-          People
+          {{ $settings.peopleText || 'people' }}
         </v-tab>
         <v-tab
           @click="$router.replace({ query: { tab: 'startups' } })"
         >
-          Startups
+          {{ $settings.startupsText || 'startups' }}
         </v-tab>
       </v-tabs>
     </NavigationSearchTopbar>
@@ -71,7 +71,6 @@ export default {
   },
   head () {
     return {
-      titleTemplate: `%s - ${this.$settings.title}` || '%s - Community Tools',
       title: 'Search',
       meta: [
         {

@@ -28,13 +28,12 @@ export default {
   },
   head () {
     return {
-      titleTemplate: `%s - ${this.$settings.title}` || '%s - Community Tools',
-      title: 'Startups',
+      title: this.$settings.startupsText || 'Startups',
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: 'All the startups in your directory'
+          content: `All the ${this.$settings.startupsText || 'startups'} in your directory`
         }
       ]
     }
