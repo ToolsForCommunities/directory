@@ -62,8 +62,8 @@ export default {
     '@nuxtjs/pwa',
     '@nuxtjs/i18n',
     '@nuxtjs/firebase',
-    // ['@nuxtjs/google-gtag', { id: process.env.VUE_APP_ANALYTICS_ID }]
-    '@nuxtjs/google-gtag'
+    '@nuxtjs/google-gtag',
+    '@nuxtjs/recaptcha'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -93,6 +93,12 @@ export default {
   'google-gtag': {
     id: process.env.VUE_APP_ANALYTICS_ID,
     debug: process.env.NODE_ENV !== 'production'
+  },
+
+  // Recaptcha
+  recaptcha: {
+    version: Number(process.env.RECAPTCHA_VERSION) || 3,
+    siteKey: process.env.RECAPTCHA_KEY || ''
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
