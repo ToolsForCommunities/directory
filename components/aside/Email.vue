@@ -41,21 +41,20 @@
           placeholder="Write what you want to tell"
           :error-messages="messageError"
         />
+      </div>
 
-        <!-- <VueRecaptcha
-          sitekey="6Lf4fOIZAAAAAEeq56xYIbvRDK7YmpGBRkDDOhpo"
-          :loadRecaptchaScript="true"
-        /> -->
+      <div class="d-flex justify-center">
         <recaptcha />
       </div>
 
-      <!-- <loading
-        v-if="$store.state.mail.loading"
-        class="mb-3"
-      /> -->
+      <MainLoader
+        v-if="$store.state.mail.isLoading"
+        class="my-4 d-flex justify-center"
+      />
 
-      <div class="justify-center">
+      <div class="mt-4">
         <CTButton
+          block
           :disabled="!canSend"
           color="primary"
           @click="sendMail()"
@@ -143,6 +142,9 @@ export default {
 
         // Reset recaptcha
         await this.$recaptcha.reset()
+
+        // Back to person profile
+        this.$router.replace(`?aside=person/${this.id}`)
       } catch (error) {
         this.$store.dispatch('alerts/show', { text: 'Something went wrong. Try again.' })
       }

@@ -48,6 +48,8 @@
       <PersonConnect :item="person" />
       <!-- /Connect CTA -->
 
+      <nuxt-link :to="`?aside=email/${person.id}`">MANDAR EMAIL</nuxt-link>
+
       <!-- About -->
       <div class="py-4">
         <span class="subtitle-1">About {{ person.name }}</span>
