@@ -1,6 +1,19 @@
 <template>
   <div v-if="active.length > 0">
     <div class="text-center">
+      <!-- Email connect -->
+      <!-- ToDo: Hide if email connect is not enabled -->
+      <nuxt-link :to="`?aside=email/${item.id}`">
+        <CTButton
+          primary
+          class="my-4 mx-1"
+          @click="$store.dispatch('track/event', { action: 'connect', category: 'person_detail', label: 'email' })"
+        >
+          Email
+        </CTButton>
+      </nuxt-link>
+
+      <!-- Social networks -->
       <a
         v-for="platform in platformList"
         :key="platform.field"
