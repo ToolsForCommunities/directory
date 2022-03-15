@@ -22,6 +22,8 @@ export default {
     ]
   },
 
+  target: process.env.DEPLOY_TARGET || 'server',
+
   // env: {
   //   baseUrl: process.env.VUE_APP_API_URL || 'http://lalala.com'
   // },
