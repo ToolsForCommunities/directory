@@ -1,4 +1,4 @@
-const DEFAULT_COLOR = 'success'
+const DEFAULT_COLOR = 'black'
 
 export const state = () => ({
   visible: false,

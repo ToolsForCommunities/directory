@@ -17,5 +17,12 @@ module.exports = {
   },
   filters: {
     all: 'More filters'
+  },
+  email: {
+    connect: 'Connect',
+    subtitle: 'Let us know your name and your email, and make the connection happen!',
+    name: 'Your name',
+    email: 'Your email',
+    message: 'Your message'
   }
 }
