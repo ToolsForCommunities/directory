@@ -6,7 +6,7 @@
         <template slot="options">
           <v-btn
             icon
-            :href="`/admin/#/suggest-person-public/${person.id}`"
+            :href="`/admin/#/suggest-startup-public/${startup.id}`"
             target="_blank"
           >
             <v-icon>edit</v-icon>
