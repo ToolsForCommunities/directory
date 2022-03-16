@@ -33,7 +33,7 @@
       <v-card-text>
         <div class="subtitle-1 text-truncate">
           <span>
-            {{ program || location }}
+            {{ programs || location || '&nbsp;' }}
           </span>
         </div>
       </v-card-text>
@@ -87,6 +87,9 @@ export default {
     },
     startup () {
       return (this.Group && this.Group[0]) || null
+    },
+    programs () {
+      return (this.program && this.program.replace(/,/g, ', ')) || null
     }
   },
   methods: {

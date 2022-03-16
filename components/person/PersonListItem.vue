@@ -2,6 +2,7 @@
   <v-list-item
     :to="`?aside=person/${id}`"
     nuxt
+    class="person-list-item"
     @click.native="track()"
   >
     <v-list-item-avatar>
@@ -56,3 +57,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+  .theme--light.person-list-item.v-list-item--active::before {
+    opacity: 0;
+  }
+</style>

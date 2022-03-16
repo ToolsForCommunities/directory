@@ -26,7 +26,7 @@
     <div class="px-4 px-md-0">
       <!-- Name -->
       <v-card-title
-        class="pb-0 pt-2 pa-0 ma-0 text-center d-block text-truncate"
+        class="startup-name pb-1 pt-3 px-0 ma-0 text-center d-block"
         :title="startup.name"
       >
         {{ startup.name }}
@@ -85,6 +85,7 @@
               v-for="program in startup.program.split(',')"
               :key="program"
               outlined
+              class="my-1 mr-2"
             >
               <v-icon small left color="#757575">
                 mdi-account-group
@@ -136,7 +137,7 @@
       <v-divider />
 
       <!-- Team -->
-      <div class="py-4">
+      <div v-if="startup.persons" class="py-4">
         <span class="subtitle-1">Team</span>
         <PersonList :people="startup.persons" />
       </div>
@@ -218,30 +219,8 @@ export default {
 </script>
 
 <style scoped>
-.aside-card {
-  border:  1px solid var(--v-grey-base);
-  /*border:  1px solid var(--v-grey-lighten1);*/
+.startup-name {
+  line-height: 1.25em;
+  word-break: break-word;
 }
-
-.aside-card,
-.aside-card .v-toolbar {
-  border-radius: 8px;
-}
-
-.lateral-scrollable {
-  max-height: calc(100vh - 48px - 32px);
-  overflow-y: scroll;
-}
-
-@media screen and (max-width: 959px) {
-
-  /* removes border from profile view in mobile */
-  /* should be a global class for other views like filters */
-  .aside-card {
-    border-radius: none;
-    border: none;
-  }
-
-}
-
 </style>

@@ -134,7 +134,7 @@ export default {
         {
           action: 'person',
           title: 'Profiles',
-          text: '<p>Profiles are mantained by a space manager. You can manually add or update your profile or your startup info by filling <a href="/admin/#/suggest-public">this form</a>. Your changes will be manually reviewd and updated as soon as possible.</p>'
+          text: '<p>Profiles are mantained by a space manager. You can manually add or update your profile or your startup info by filling <a href="/admin/#/suggest-public">this form</a>. Your changes will be manually reviewed and updated as soon as possible.</p>'
         },
         {
           action: 'lock',

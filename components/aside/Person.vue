@@ -33,13 +33,14 @@
         {{ fullname }}
       </v-card-title>
       <!-- /Name -->
+
       <!-- Job description -->
       <v-card-text
         v-if="startup"
         class="pa-0 ma-0 text-center"
       >
         <div class="subtitle-1 d-flex flex-column">
-          <span>
+          <span class="job-title">
             {{ startup.role }}
           </span>
           <span>
@@ -228,8 +229,18 @@ export default {
   // },
   methods: {
     categoryTags (category) {
+      if (!this.person || !this.person.Tag) {
+        return []
+      }
+
       return this.person.Tag.filter(tag => tag.category && tag.category === category) || []
     }
   }
 }
 </script>
+
+<style scoped>
+  .job-title {
+    line-height: 1.24em;
+  }
+</style>
