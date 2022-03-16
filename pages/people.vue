@@ -1,8 +1,15 @@
 <template>
   <div>
+    <!-- Page Navbar -->
     <NavigationMainTopbar
       :title="$t('people.title')"
-    />
+    >
+      <template slot="options">
+        <AddNewButton />
+      </template>
+    </NavigationMainTopbar>
+
+    <!-- Page Content -->
     <v-container class="pt-0 mt-2">
       <!-- Filters -->
       <FilterList for="people" class="mb-1" />

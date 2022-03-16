@@ -7,24 +7,10 @@
       <h1>
         {{ title }}
       </h1>
+
       <v-spacer />
-      <a
-        v-if="!$settings.hideAddButton"
-        href="/admin/#/suggest-public/"
-        target="_blank"
-      >
-        <CTButton
-          text
-        >
-          <!-- <v-icon left>
-            mdi-account-plus
-          </v-icon> -->
-          <!-- <v-icon left>
-            mdi-plus-circle-outline
-          </v-icon> -->
-          Add new
-        </CTButton>
-      </a>
+
+      <slot name="options" />
     </v-app-bar>
     <v-divider style="position: absolute; width: 100%" />
   </div>

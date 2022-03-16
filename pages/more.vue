@@ -40,7 +40,6 @@
         </div>
         <v-expansion-panels
           v-model="panel"
-          multiple
           accordion
           class="mt-3"
         >

@@ -1,9 +1,16 @@
 <template>
   <!-- <div class="ct-container ct-container__has-topbar"> -->
   <div>
+    <!-- Page Navbar -->
     <NavigationMainTopbar
       :title="$t('startups.title')"
-    />
+    >
+      <template slot="options">
+        <AddNewButton />
+      </template>
+    </NavigationMainTopbar>
+
+    <!-- Page Content -->
     <v-container>
       <FilterList for="startups" />
 
