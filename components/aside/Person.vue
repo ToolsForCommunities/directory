@@ -2,7 +2,17 @@
   <AsideCard>
     <!-- Toolbar -->
     <template slot="toolbar">
-      <AsideNavigationMain />
+      <AsideNavigationMain>
+        <template slot="options">
+          <v-btn
+            icon
+            :href="`/admin/#/suggest-person-public/${person.id}`"
+            target="_blank"
+          >
+            <v-icon>edit</v-icon>
+          </v-btn>
+        </template>
+      </AsideNavigationMain>
     </template>
 
     <!-- Content -->
